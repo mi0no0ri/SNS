@@ -43,12 +43,9 @@ Route::get('/search','UsersController@index');
 Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
 
-//実装確認用
-Route::get('/logout','Auth\LoginController@logout');
-
 //ログアウトのページ
-Route::get('/logout','Auth\LoginController@loggedOut');
-Route::post('/logout','Auth\LoginController@loggedOut');
+Route::get('/logout','Auth\LoginController@logout');
+Route::post('/logout','Auth\LoginController@logout');
 
 //バリデーション
 Route::get('/login','Authenticate@redirectTo')
@@ -59,3 +56,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // ユーザー検索
 Route::get('/search','UsersController@search');
+
+// 投稿
+Route::get('/post/create','PostsController@create');
+Route::post('/post/create','PostsController@create');
+

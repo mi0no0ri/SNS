@@ -57,10 +57,11 @@ class LoginController extends Controller
         return view("auth.login");
     }
 
-    use AuthenticatesUsers;
-    protected function loggedOut(Request $request)
+    protected function logout(Request $request)
     {
-        return redirect('login');
-        // return Auth::logout();
+        $user = Auth::user();
+
+        Auth::logout();
+        return redirect('/login');
     }
 }

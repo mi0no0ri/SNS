@@ -12,11 +12,138 @@ header{
 #row{
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-around;
 }
 #container{
     flex: 0 0 80%;
 }
+.image {
+	height: 70%;
+	width: 70%;
+}
+.arrow {
+	height: 1rem;
+	width: 1rem;
+}
+#head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 50px;
+}
+
+
+/* side bar */
 #side-bar{
-    flex: 0 0 19%;
-    border-left: 1px solid #6C6C6C;
+  flex: 0 0 19%;
+  border-left: 2px solid #6C6C6C;
+}
+.search_bar {
+	margin: 20px 10px 20px 20px;
+	height: 40px;
+	width: 400px;
+}
+#confirm {
+  border-bottom: 1px solid #6C6C6C;
+}
+.user_search {
+  margin: 20px;
+}
+#username {
+  margin: 10px;
+}
+.side_bar .inner {
+  margin-left: auto;
+}
+.population {
+	display: flex;
+	justify-content: space-around;
+}
+.form {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 5px;
+}
+
+
+/* accordion menu */
+.accordion_menu h3 {
+  margin: 0 0 1rem 0;
+  font-size: 16px;
+  cursor: pointer;
+  color: #fff;
+  position: relative;
+  padding: 0 0 0 1.6rem;
+  line-height: 1.5;
+
+}
+.accordion_menu h3:hover {
+  color: #113049;
+  text-decoration: underline;
+}
+.accordion_menu ul {
+  margin: 0 0 1rem 0;
+  list-style-type: none;
+  font-size: 14px;
+}
+.accordion_menu h3 span {
+  display: inline-block;
+  cursor: pointer;
+  color: #fff;
+}
+.accordion_menu h3 span:after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 0 0 .5em;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border-right: solid 1px #fff;
+  border-bottom: solid 1px #fff;
+  transform: rotate(45deg);
+  transition: 0.2s;
+}
+.accordion_menu h3.selected span:after {
+  margin: 3px 0 0 .5em;
+  transform: rotate(225deg);
+  transition: 0.2s;
+}
+.accordion_menu .hidden {
+  display: none;
+  position: relative;
+  margin: 0;
+  padding: 0 0 15px 1.6em;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+}
+
+/* tweet */
+.form_control{
+  height: 90px;
+  width: 535%;
+  background-color: #f8fafc;
+  border: none;
+}
+.form_control::placeholder {
+  text-align: start;
+}
+.form_control:focus {
+  outline: none;
+}
+form {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 4 solid #6C6C6C;
+}
+.profile_img {
+  border-radius: 50%;
+  margin: 20px;
+}
+.post_btn {
+  height: 30px;
+  width: 30px;
+  margin: 60px 60px 0 50%;
 }
