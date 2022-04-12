@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RedirectIfAuthenticated;
-use APp\Http\Middleware\Authenticate;
+use App\Http\Middleware\Authenticate;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,8 +56,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // ユーザー検索
 Route::get('/search','UsersController@search');
+Route::post('/result','UsersController@search');
 
 // 投稿
 Route::get('/post/create','PostsController@create');
 Route::post('/post/create','PostsController@create');
 
+//投稿の編集
+Route::get('post/{id}/update-form', 'PostsController@updateForm');
+Route::post('post/update','PostsController@update');
+
+// delete
+Route::get('post/{id}/delete','PostsController@delete');

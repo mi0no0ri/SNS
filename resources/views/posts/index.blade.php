@@ -23,6 +23,8 @@
             <td>{{ $list->user_id }}</td>
             <td>{{ $list->post }}</td>
             <td>{{ $list->created_at }}</td>
+            <td><a href="/post/{{$list->id}}/update-form" class="edit_btn"><img src="../images/edit.png" alt="編集"></a></td>
+            <td><a href="/post/{{$list->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')" class="delete_btn"><img src="../images/trash_h.png" alt="削除"></a></td>
         </tr>
         @endforeach
     </table>
