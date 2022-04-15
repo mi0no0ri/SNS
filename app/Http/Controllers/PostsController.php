@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Controllers\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Post;
-use App\User;
+use App\Models\Post;
+use App\Models\User;
 use Validator;
 use App\Http\Controller\Board;
 

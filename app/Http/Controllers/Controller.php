@@ -8,7 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
-use App\Follow;
+use App\Models\Follow;
 
 class Controller extends BaseController
 {
@@ -21,10 +21,10 @@ class Controller extends BaseController
 //ログインユーザー名
 $username = Auth::user();
 //フォロワーのカウント
-$countFollower = Follow::where('follow', '=', Auth::id())
+$countFollower = Follow::where('follow_id', '=', Auth::id())
 ->count();
 //フォローのカウント
-$countFollow = Follow::where('follower', '=', Auth::id())
+$countFollow = Follow::where('follower_id', '=', Auth::id())
 ->count();
 
 // お試し
@@ -33,10 +33,11 @@ $info = Auth::user();
 
 
 //全ビューで共通で使えるよう渡してあげる。むっちゃ素敵。
+$username = array('username'=>null);
 View::share('username', $username['username']);
-View::share('userimage', $username['images']);
-View::share('countFollower', $countFollower);
-View::share('countFollow', $countFollow);
+// View::share('userimages', $username['images']);
+View::share('countFollower_id', $countFollower);
+View::share('countFollow_id', $countFollow);
 View::share('info', $info);
 
 

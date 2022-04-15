@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Dawnが提供するSNSサービスです">
     <title>DawnSNS</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/app.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -24,7 +24,7 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a href="/top"><img src="images/main_logo.png" class="image"></a></h1>
+        <h1><a href="/top"><img src="/images/main_logo.png" class="image"></a></h1>
             <div class="accordion_menu">
                 <h3 class="ac_title"><span><?php $user = Auth::user();?>{{ $user->username }}　さん<!-- <img class="" src="images/arrow.png">--></span></h3>
                 <ul class="hidden">
@@ -46,7 +46,7 @@
                     <p>フォロー数</p>
                     <p>名</p>
                 </div>
-                <p class="btn follow_btn"><a href="/follow-list" class="inner">フォローリスト</a></p>
+                <p class="btn follow_btn"><a href="/followList" class="inner">フォローリスト</a></p>
                 <div class="population">
                     <p>フォロワー数</p>
                     <p>名</p>

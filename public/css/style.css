@@ -147,3 +147,8 @@ form {
   width: 30px;
   margin: 60px 60px 0 50%;
 }
+/* follow */
+.follow_img {
+  display: flex;
+  justify-content: space-between;
+}

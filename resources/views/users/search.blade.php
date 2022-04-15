@@ -16,8 +16,24 @@
     <table class="search_list">
         @foreach ($list as $list)
         <tr>
+            <td><img src="{{ $list->images }}" class="profile_img"></td>
             <td>{{ $list->username }}</td>
         </tr>
+        <div>
+            @if (auth()->user()->isFollowing($user->id))
+            <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
+                {{ csrf_field() }}
+
+                <button type="submit" class="">フォロー解除</button>
+            </form>
+            @else
+            <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST">
+                {{ csrf_field() }}
+
+                <button type="submit" class="">フォローする</button>
+            </form>
+            @endif
+        </div>
         @endforeach
     </table>
     @else

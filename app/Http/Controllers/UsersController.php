@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\User;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use App\Models\User;
+use App\Models\Post;
+use App\Models\Follower;
 
 class UsersController extends Controller
 {
@@ -28,5 +32,26 @@ class UsersController extends Controller
         $list = $query->get();
 
     return view('users.search',['list'=>$list]);
+    }
+
+    // follow
+    public function follow(User $user)
+    {
+        $follower = auth()->user();
+        $is_following = $follower->isFollowing($user->id);
+        if(!$is_following){
+            $follower->follow($user->id);
+            return back();
+        }
+    }
+    // unfollow
+    public function unfollow(User $user)
+    {
+        $follower = auth()->user();
+        $is_following = $follower->isFollowing($user->id);
+        if($is_following) {
+            $follower->unfollow($user->id);
+            return back();
+        }
     }
 }

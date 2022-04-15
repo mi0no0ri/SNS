@@ -15,13 +15,16 @@ use App\Http\Middleware\Authenticate;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', function () {
+    return view('/login');
+});
+Route::get('/home', 'HomeController@index')->name('home');
 
-//Auth::routes();
+Auth::routes();
 
+Route::group(['middleware' => 'auth'], function(){
+    Route::resource('users', 'UsersController');
+});
 
 //ログアウト中のページ
 Route::get('/login', 'Auth\LoginController@login');
@@ -68,3 +71,14 @@ Route::post('post/update','PostsController@update');
 
 // delete
 Route::get('post/{id}/delete','PostsController@delete');
+
+// followList
+Route::get('/followList', 'FollowsController@followList');
+Route::get('/search', 'UsersController@follow');
+
+Route::group(['middleware' => 'auth'],function(){
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show', 'edit', 'update']]);
+
+    Route::post('users/{user}/follow', 'UsersController@follow')->name('follow');
+    Route::delete('users/{user}/unfollow', 'UserController@unfollow')->name('unfollow');
+});
