@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Post;
-use App\Models\Follower;
+use App\Models\Follow;
 
 class UsersController extends Controller
 {
