@@ -25,14 +25,16 @@
     <header>
         <div id = "head">
         <h1><a href="/top"><img src="/images/main_logo.png" class="image"></a></h1>
-            <div class="accordion_menu">
-                <h3 class="ac_title"><span><?php $user = Auth::user();?>{{ $user->username }}　さん<!-- <img class="" src="images/arrow.png">--></span></h3>
-                <ul class="hidden">
-                    <li class="ac_child"><a href="/top">ホーム</a></li>
-                    <li class="ac_child"><a href="/profile">プロフィール編集</a></li>
-                    <li class="ac_child"><a href="/logout">ログアウト</a></li>
+        <nav>
+            <div class="accordion_menu" id="accordion_menu">
+                <h3 class="ac_title" data-target="hidden"><span><?php $user = Auth::user();?>{{ $user->username }} さん<!-- <img class="" src="images/arrow.png">--></span></h3>
+                <ul id="hidden">
+                    <li class="ac_child"><a href="/top" class="ac_child">ホーム</a></li>
+                    <li class="ac_child"><a href="/profile" class="ac_child">プロフィール編集</a></li>
+                    <li class="ac_child"><a href="/logout" class="ac_child">ログアウト</a></li>
                 </ul>
             </div>
+        </nav>
         </div>
     </header>
     <div id="row">
@@ -53,12 +55,13 @@
                 </div>
                 <p class="btn follow_btn"><a href="/follower" class="inner">フォロワーリスト</a></p>
             </div>
-            <p class="btn user_search"><a href="/search">ユーザー検索</a></p>
+            <p class="btn user_search"><a href="/search" class="inner">ユーザー検索</a></p>
         </div>
     </div>
     <footer>
     </footer>
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script src="../../js/accordion.js"></script>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/accordion.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </body>
 </html>

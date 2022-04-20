@@ -6,20 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    public function user(){
-        return $this->belongsTo('App\Models\User');
-    }
     protected $fillable = [
-        'text'
+        'post',
+        'user_id',
+        'created_at',
+        'update_at',
     ];
-    protected $guarded = array('id');
-
-        public static $rules = array(
-            'post_content' => 'required',
-    );
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     public function getDate()
     {
         return $this->id . ': ' . $this->post_content . '('
             . $this->users->username . ')';
     }
+
 }

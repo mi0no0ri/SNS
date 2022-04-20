@@ -12,7 +12,7 @@ header{
 #row{
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: center;
 }
 #container{
     flex: 0 0 80%;
@@ -39,7 +39,7 @@ header{
   border-left: 2px solid #6C6C6C;
 }
 .search_bar {
-	margin: 20px 10px 20px 20px;
+	margin: 20px 10px 20px 70px;
 	height: 40px;
 	width: 400px;
 }
@@ -65,6 +65,9 @@ header{
 	align-items: center;
 	gap: 5px;
 }
+.inner {
+  color: #fff;
+}
 
 
 /* accordion menu */
@@ -72,11 +75,9 @@ header{
   margin: 0 0 1rem 0;
   font-size: 16px;
   cursor: pointer;
-  color: #fff;
   position: relative;
   padding: 0 0 0 1.6rem;
   line-height: 1.5;
-
 }
 .accordion_menu h3:hover {
   color: #113049;
@@ -110,17 +111,43 @@ header{
   transform: rotate(225deg);
   transition: 0.2s;
 }
-.accordion_menu .hidden {
+.accordion_menu #hidden {
   display: none;
-  position: relative;
-  margin: 0;
-  padding: 0 0 15px 1.6em;
+  margin: 19px 0 0 0;
   font-size: 14px;
   line-height: 1.5;
   color: #666;
 }
+#hidden {
+  background: #fff;
+  color: #6C6C6C;
+  width: 19.5%;
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  overflow: hidden;
+  border: 2px solid #6C6C6C;
+}
+#hidden li {
+  text-align: center;
+}
+#hidden a {
+  display: block;
+  align-items: center;
+  padding: 20px 0;
+}
+.ac_child {
+  border-bottom: 1px solid #6C6C6C;
+  color: #6C6C6C;
+}
+.ac_child:hover {
+  background-color: #ff4747;
+  color: #fff;
+  text-decoration: none;
+}
 
-/* tweet */
+
+/* post */
 .form_control{
   height: 90px;
   width: 535%;
@@ -147,8 +174,82 @@ form {
   width: 30px;
   margin: 60px 60px 0 50%;
 }
+.edit_btn,
+.delete_btn {
+  height: 40px;
+  width: 40px;
+}
+.post_list {
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px 30px;
+  color: #6C6C6C;
+  border-bottom: 1px solid #6C6C6C;
+}
+.post_head {
+  display: flex;
+  justify-content: space-between;
+}
+.post_list_btn {
+  display: flex;
+  justify-content: end;
+  margin: 20px 0 0 0;
+  gap: 20px;
+}
+.delete_btn:hover {
+  background-image: url(../images/trash.png);
+}
+
 /* follow */
 .follow_img {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  margin: 0 100px;
+}
+.follow_title {
+  margin: 20px 70px;
+}
+.follow_container {
+  border-bottom: 2px solid #6C6C6C;
+}
+.profile_img {
+  border-radius: 50%;
+}
+.follow_link {
+
+}
+
+/* search */
+.search_list {
+  display: flex;
+  justify-content: start;
+}
+.search_page {
+  display: flex;
   justify-content: space-between;
+  margin: 20px 200px 0 50px;
+}
+.search_img {
+  flex-basis: 50px;
+}
+.search_name {
+  display: flex;
+  align-items: center;
+}
+.follow_set_btn {
+  background-color: #3490dc!important;
+  color: #fff;
+}
+.unfollow_set_btn {
+  background-color: #ff4747!important;
+  color: #fff;
+}
+.profile_img {
+  height: 50px;
+  width: 50px;
+}
+.search_name {
+  color: #6C6C6C;
+  position: center;
 }

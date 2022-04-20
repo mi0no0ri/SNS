@@ -7,7 +7,7 @@ use App\Models\User;
 
 class FollowsController extends Controller
 {
-        public function followList(User $user)
+    public function followList(User $user)
     {
         $all_users = $user->getAllUsers(auth()->user()->id);
 
@@ -15,7 +15,8 @@ class FollowsController extends Controller
             'all_users' =>$all_users
         ]);
     }
-    public function followerList(){
+    public function followerList()
+    {
         return view('follows.followerList');
     }
 }

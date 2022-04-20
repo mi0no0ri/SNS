@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Follow;
 use Validator;
 use App\Http\Controller\Board;
 
@@ -15,7 +16,12 @@ class PostsController extends Controller
 
     public function index()
     {
-        $list = DB::table('posts')->get();
+        User::latest()->get();
+
+        $list = DB::table('posts')
+        ->leftJoin('users','posts.user_id' , '=' , 'users.id')
+        ->select('posts.id','users.username','posts.created_at','posts.post')
+        ->get();
         return view('posts.index',['list'=>$list]);
     }
 
@@ -29,6 +35,9 @@ class PostsController extends Controller
         $post = $request->input('newPost');
         DB::table('posts')->insert([
             'post' => $post,
+            'user_id' => Auth::id(),
+            // 'created_at' => Auth::id(),
+            // 'images' => Auth::id(),
         ]);
         return redirect('/top');
     }
@@ -65,4 +74,12 @@ class PostsController extends Controller
             ->delete();
         return redirect('/top');
     }
+
+    public function show($id)
+    {
+        $val = Post::with('user')->where('id', $id)->first();
+
+        return view('/top')->with('val',$val);
+    }
+
 }

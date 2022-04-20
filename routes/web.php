@@ -43,9 +43,6 @@ Route::get('/profile','UsersController@profile');
 
 Route::get('/search','UsersController@index');
 
-Route::get('/follow-list','PostsController@index');
-Route::get('/follower-list','PostsController@index');
-
 //ログアウトのページ
 Route::get('/logout','Auth\LoginController@logout');
 Route::post('/logout','Auth\LoginController@logout');
@@ -74,10 +71,10 @@ Route::get('post/{id}/delete','PostsController@delete');
 
 // followList
 Route::get('/followList', 'FollowsController@followList');
-Route::get('/search', 'UsersController@follow');
+Route::get('/follow', 'UsersController@follow');
 
 Route::group(['middleware' => 'auth'],function(){
-    Route::resource('users', 'UsersController', ['only' => ['index', 'show', 'edit', 'update']]);
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show', 'update', 'updateForm']]);
 
     Route::post('users/{user}/follow', 'UsersController@follow')->name('follow');
     Route::delete('users/{user}/unfollow', 'UserController@unfollow')->name('unfollow');

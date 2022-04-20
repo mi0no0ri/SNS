@@ -13,27 +13,29 @@
         </form>
     </div>
     @if($list->count())
-    <table class="search_list">
+    <table>
         @foreach ($list as $list)
-        <tr>
-            <td><img src="{{ $list->images }}" class="profile_img"></td>
-            <td>{{ $list->username }}</td>
-        </tr>
-        <div>
-            @if (auth()->user()->isFollowing($user->id))
-            <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
-                {{ csrf_field() }}
+        <ul class="search_page">
+            <ul class="search_list">
+                <li class="search_img"><img src="{{ $list->images }}" class="profile_img"></li>
+                <li class="search_name">{{ $list->username }}</li>
+            </ul>
+            <li class="follow_btn">
+                @if(auth()->user()->isFollow($user->id))
+                <form action="{{ route('unfollow', ['user' => $list->id]) }}" method="POST">
+                    {{ csrf_field() }}
+                    @method('delete')
+                    <button type="submit" class="btn unfollow_set_btn">フォロー解除</button>
+                </form>
+                @else
+                <form action="{{ route('follow', ['user' => $list->id]) }}" method="POST">
+                    {{ csrf_field() }}
 
-                <button type="submit" class="">フォロー解除</button>
-            </form>
-            @else
-            <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST">
-                {{ csrf_field() }}
-
-                <button type="submit" class="">フォローする</button>
-            </form>
-            @endif
-        </div>
+                    <button type="submit" class="btn follow_set_btn">フォローする</button>
+                </form>
+                @endif
+            </li>
+        </ul>
         @endforeach
     </table>
     @else

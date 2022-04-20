@@ -13,19 +13,18 @@
     </div>
     @csrf
     <table>
-        <tr>
-            <th>投稿者</th>
-            <th>投稿内容</th>
-            <th>投稿日</th>
-        </tr>
         @foreach ($list as $list)
-        <tr>
-            <td>{{ $list->user_id }}</td>
-            <td>{{ $list->post }}</td>
-            <td>{{ $list->created_at }}</td>
-            <td><a href="/post/{{$list->id}}/update-form" class="edit_btn"><img src="../images/edit.png" alt="編集"></a></td>
-            <td><a href="/post/{{$list->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')" class="delete_btn"><img src="../images/trash_h.png" alt="削除"></a></td>
-        </tr>
+        <ul class="post_list">
+            <div class="post_head">
+                <li class="">{{ $list->username }}</li>
+                <li class="created_at">{{ $list->created_at }}</li>
+            </div>
+            <li class="post_content">{{ $list->post }}</li>
+            <div class="post_list_btn">
+                <li><a href="/post/{{$list->id}}/update-form" class="edit_btn"><img src="../images/edit.png" alt="編集"></a></li>
+                <li><a href="/post/{{$list->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')"><img src="../images/trash_h.png" alt="削除" class="delete_btn"></a></li>
+            </div>
+        </ul>
         @endforeach
     </table>
 </div>
