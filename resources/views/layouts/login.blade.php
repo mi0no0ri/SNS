@@ -27,10 +27,13 @@
         <h1><a href="/top"><img src="/images/main_logo.png" class="image"></a></h1>
         <nav>
             <div class="accordion_menu" id="accordion_menu">
-                <h3 class="ac_title" data-target="hidden"><span><?php $user = Auth::user();?>{{ $user->username }} さん<!-- <img class="" src="images/arrow.png">--></span></h3>
+                <h3 class="ac_title" data-target="hidden">
+                    <span><?php $user = Auth::user();?>{{ $user->username }} さん</span>
+                    <img src="/storage/dawn.png" alt="" class="profile_image">
+                </h3>
                 <ul id="hidden">
                     <li class="ac_child"><a href="/top" class="ac_child">ホーム</a></li>
-                    <li class="ac_child"><a href="/profile" class="ac_child">プロフィール編集</a></li>
+                    <li class="ac_child"><a href="{{route('profile')}}" class="ac_child">プロフィール編集</a></li>
                     <li class="ac_child"><a href="/logout" class="ac_child">ログアウト</a></li>
                 </ul>
             </div>
@@ -46,12 +49,14 @@
                 <p id="username"><?php $user = Auth::user();?>{{ $user->username }}さんの</p>
                 <div class="population">
                     <p>フォロー数</p>
-                    <p>名</p>
+                    <p><?php $follows = DB::table('follows'); ?>
+                    {{ $follows->where('follower_id', '=', Auth::id())->count()-1 }} 名</p>
                 </div>
                 <p class="btn follow_btn"><a href="/followList" class="inner">フォローリスト</a></p>
                 <div class="population">
                     <p>フォロワー数</p>
-                    <p>名</p>
+                    <p><?php $follows = DB::table('follows'); ?>
+                    {{ $follows->where('follow_id', '=', Auth::id())->count() }} 名</p>
                 </div>
                 <p class="btn follow_btn"><a href="/follower" class="inner">フォロワーリスト</a></p>
             </div>

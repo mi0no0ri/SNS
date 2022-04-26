@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Post;
+use Auth;
 
 class Post extends Model
 {
@@ -12,7 +14,8 @@ class Post extends Model
         'created_at',
         'update_at',
     ];
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
     public function getDate()

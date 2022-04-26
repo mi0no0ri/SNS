@@ -4,54 +4,122 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validate;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Follow;
+use Auth;
 
 class UsersController extends Controller
 {
-    public function profile(){
-        return view('users.profile');
+    public function index()
+    {
+        $auth = Auth::user();
+        return view('users.profile',['auth' => $auth]);
     }
 
-    // public function search(Request $request){
-    //     $list = User::where('username',$request->input)->get();
-    //     $param = ['input' => $request->input, 'list' => $list];
-    //     return view('users.search', $param);
-    // }
-    public function search(Request $request){
+    public function edit($id)
+    {
+        $auth = Auth::user();
+        return view('users.profile', [ 'auth' => $auth]);
+    }
+    public function profileUpdate(Request $request,User $user)
+    {
+        // $request->Validate([
+        //     'username' => 'required | string | max:255',
+        //     'mail' => ['required', 'string', 'email','max:255',Rule::unique('users')->ignore(Auth::id())],
+        // ]);
+
+        try {
+            $user = Auth::user();
+            $user->username = $request->input('username');
+            $user->mail = $request->input('mail');
+            $user->bio = $request->input('bio');
+            $user->save();
+        } catch(\Exception $e){
+            return back()->with('msg_error','プロフィールの更新に失敗しました。')->with();
+        }
+        return redirect()->route('profile')->with('msg_success','プロフィールの更新は完了しました。');
+    }
+    public function store(Request $request,User $user)
+    {
+        $document = $request->document;
+        $document->store('public');
+        return redirect()->route('profile');
+    }
+    public function passwordUpdate(request $request)
+    {
+        // $request->Validate([
+        //     'password' => 'required | string | min:8 | confirmed',
+        // ]);
+        try {
+            $user = Auth::user();
+            $user->password = bcrypt($request->input('password'));
+            $user->save();
+        } catch (\Exception $e) {
+            return back()->with('msg_error', 'パスワードの更新に失敗しました。')->with();
+        }
+        return redirect()->route('profile')->with('msg_success','パスワードの更新は完了しました。');
+    }
+    public function profile(User $user)
+    {
+        $list = Auth::user();
+        return view('posts.userProfile',['list' => $list]);
+    }
+
+    public static $editRules = array(
+        'password' => 'confirmed'
+    );
+    public function storeImages(Request $request, User $user)
+    {
+        $file = $request->images->store('public');
+        $user->image = str_replace('public/', '', $file);
+        $user->save();
+        return redirect('/top')->with('user', $user);
+    }
+
+
+    public function search(Request $request)
+    {
         $keyword = $request->input('keyword');
 
-        $query = DB::table('users');
+        $lists = DB::table('users')->get()->toArray();
+        $followings = DB::table('follows')->where('follower_id',Auth::id())->get()->toArray();
+        $query = User::query();
 
         if(!empty($keyword)) {
-            $query->where('username','LIKE',"%{$keyword}%");
+            $query->where('username','LIKE',"%{$keyword}%")->where('id', '<>', Auth::id());
         }
-        $list = $query->get();
+        $lists = $query->where('id', '<>', Auth::id())->get();
 
-    return view('users.search',['list'=>$list]);
+        return view('users.search',['lists'=>$lists,'followings' =>$followings]);
     }
 
     // follow
     public function follow(User $user)
     {
-        $follower = auth()->user();
-        $is_following = $follower->isFollowing($user->id);
-        if(!$is_following){
-            $follower->follow($user->id);
-            return back();
+        $follow = DB::table('follows')->where('follow_id', Auth::id())->first();
+        if(empty($follow)) {
+            $follow->create([
+                'follow_id' => $user()->id,
+                'follower_id' => $user()->id,
+            ]);
         }
     }
     // unfollow
     public function unfollow(User $user)
     {
-        $follower = auth()->user();
-        $is_following = $follower->isFollowing($user->id);
-        if($is_following) {
-            $follower->unfollow($user->id);
-            return back();
-        }
+        // $follower = auth()->user();
+        // $is_following = $follower->isFollowing($user->id);
+        // if($is_following) {
+        //     $follower->unfollow($user->id);
+        //     return back();
+        // }
+
+        $follower = DB::table('follows')->where('follower_id', Auth::id())->first();
+        $follower->delete();
+
+        return redirect('/search');
     }
 }

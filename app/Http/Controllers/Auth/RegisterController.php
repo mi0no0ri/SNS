@@ -66,10 +66,10 @@ class RegisterController extends Controller
         return User::create([
             'username' => $data['username'],
             'mail' => $data['mail'],
-            'password' => bcrypt($data['password']),
+            'password' => Hash::make($data['password']),
+            'images' => 'dawn.png',
         ]);
     }
-
 
     // public function registerForm(){
     //     return view("auth.register");

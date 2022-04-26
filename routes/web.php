@@ -39,9 +39,14 @@ Route::get('/added', 'Auth\RegisterController@added');
 //ログイン中のページ
 Route::get('/top','PostsController@index');
 
-Route::get('/profile','UsersController@profile');
+// profile
+Route::group(['middleware' => 'auth'],function(){
 
-Route::get('/search','UsersController@index');
+Route::get('/profile','UsersController@index')->name('profile');
+Route::put('/profile','UsersController@profileUpdate')->name('profileUpdate');
+Route::put('/password_change','UserController@passwordUpdate')->name('password_edit');
+});
+Route::get('/userProfile','UsersController@profile')->name('user_profile');
 
 //ログアウトのページ
 Route::get('/logout','Auth\LoginController@logout');
@@ -73,9 +78,13 @@ Route::get('post/{id}/delete','PostsController@delete');
 Route::get('/followList', 'FollowsController@followList');
 Route::get('/follow', 'UsersController@follow');
 
+// followerList
+Route::get('/follower','FollowsController@followerList');
+
 Route::group(['middleware' => 'auth'],function(){
     Route::resource('users', 'UsersController', ['only' => ['index', 'show', 'update', 'updateForm']]);
 
     Route::post('users/{user}/follow', 'UsersController@follow')->name('follow');
-    Route::delete('users/{user}/unfollow', 'UserController@unfollow')->name('unfollow');
+    Route::delete('users/{user}/unfollow', 'UsersController@unfollow')->name('unfollow');
 });
+

@@ -16,12 +16,10 @@ class PostsController extends Controller
 
     public function index()
     {
-        User::latest()->get();
-
         $list = DB::table('posts')
         ->leftJoin('users','posts.user_id' , '=' , 'users.id')
         ->select('posts.id','users.username','posts.created_at','posts.post')
-        ->get();
+        ->latest()->get();
         return view('posts.index',['list'=>$list]);
     }
 
@@ -36,7 +34,8 @@ class PostsController extends Controller
         DB::table('posts')->insert([
             'post' => $post,
             'user_id' => Auth::id(),
-            // 'created_at' => Auth::id(),
+            'created_at' => now(),
+            'updated_at' => now(),
             // 'images' => Auth::id(),
         ]);
         return redirect('/top');

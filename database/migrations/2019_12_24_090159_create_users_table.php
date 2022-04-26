@@ -23,6 +23,9 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
     }
+    protected $fillable = [
+        'username','mail','password','images',
+    ];
 
     /**
      * Reverse the migrations.

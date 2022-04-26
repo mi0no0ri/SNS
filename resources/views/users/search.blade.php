@@ -12,16 +12,16 @@
             @csrf
         </form>
     </div>
-    @if($list->count())
+    @if(isset($lists))
     <table>
-        @foreach ($list as $list)
+        @foreach ($lists as $list)
         <ul class="search_page">
             <ul class="search_list">
-                <li class="search_img"><img src="{{ $list->images }}" class="profile_img"></li>
+                <li class="search_img"><a href="{{route('user_profile')}}"><img src="{{ $list->images }}" class="profile_img"></a></li>
                 <li class="search_name">{{ $list->username }}</li>
             </ul>
             <li class="follow_btn">
-                @if(auth()->user()->isFollow($user->id))
+                @if(in_array($list->id,array_column($followings,'follow_id') ))
                 <form action="{{ route('unfollow', ['user' => $list->id]) }}" method="POST">
                     {{ csrf_field() }}
                     @method('delete')
@@ -38,8 +38,6 @@
         </ul>
         @endforeach
     </table>
-    @else
-    <p>見つかりませんでした。</p>
     @endif
 </div>
 

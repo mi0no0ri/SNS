@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -41,9 +43,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(self::class, 'follows', 'follow_id', 'follower_id');
     }
-    public function getAllUsers(Int $user_id)
+    public function getFollowUsers(Int $user_id)
     {
-        return $this->Where('id', '<>', $user_id)->paginate();
+        return DB::table('follows')->where('follower_id', '=', Auth::id())->get('id');
+    }
+    public function getFollowerUsers(Int $user_id)
+    {
+        return DB::table('follows')->where('follow_id', '=', Auth::id())->get('id');
     }
     // follow
     public function follow(Int $user_id)

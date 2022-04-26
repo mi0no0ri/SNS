@@ -4,7 +4,7 @@
 <div>
     <div id="tweet">
         {!! Form::open(['url' => 'post/create']) !!}
-        <p><img src="../images/dawn.png" alt="プロフィール写真" class="profile_img"></p>
+        <p><img src="storage/dawn.png" alt="プロフィール写真" class="profile_img"></p>
         <div class="form_group">
             {!! Form::input('text', 'newPost', null, ['required', 'class' => 'form_control', 'placeholder' => '何をつぶやこうか...?']) !!}
         </div>
@@ -15,6 +15,7 @@
     <table>
         @foreach ($list as $list)
         <ul class="post_list">
+            <li><a href=""><img src="/storage/dawn.png" alt="NO IMAGE" class="profile_image"></a></li>
             <div class="post_head">
                 <li class="">{{ $list->username }}</li>
                 <li class="created_at">{{ $list->created_at }}</li>
