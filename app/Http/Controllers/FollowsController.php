@@ -21,11 +21,11 @@ class FollowsController extends Controller
             ->leftJoin('follows', 'users.id', '=', 'follows.follower_id')
             ->groupBy('posts.id')
             ->where('users.id', '<>', Auth::id())
-            ->select('posts.id','users.username','posts.created_at','posts.post')
+            ->select('posts.id','users.username','posts.created_at','posts.post','posts.user_id','users.images')
             ->latest()->get('posts.id');
 
         return view('follows.followList', [
-            'follow_users' =>$follow_users,
+            'follow_users' => $follow_users,
             'lists' => $lists
         ]);
     }
@@ -39,7 +39,7 @@ class FollowsController extends Controller
             ->leftJoin('follows', 'users.id', '=', 'follows.follow_id')
             ->groupBy('posts.id')
             ->where('users.id', '<>', Auth::id())
-            ->select('posts.id','users.username','posts.created_at','posts.post')
+            ->select('posts.id','users.username','posts.created_at','posts.post','posts.user_id','users.images')
             ->latest()->get('posts.id');
 
 

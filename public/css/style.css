@@ -192,6 +192,10 @@ form {
   color: #6C6C6C;
   border-bottom: 1px solid #6C6C6C;
 }
+/* .post {
+  display: flex;
+  justify-content: space-around;
+} */
 .post_head {
   display: flex;
   justify-content: space-between;
@@ -277,4 +281,21 @@ form {
 .submit_btn {
   display: flex;
   justify-content: center;
+}
+/* otherProfile */
+#other_bar {
+  border-bottom: 4px solid #6C6C6C;
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 70px;
+}
+.other_user {
+  display: flex;
+  justify-content: start;
+}
+.other_info {
+  margin: 20px 0;
+}
+.other_column {
+  padding: 0 30px 0 0;
 }

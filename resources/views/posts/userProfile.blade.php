@@ -2,19 +2,21 @@
 
 @section('content')
 <div>
-    <ul>
-        <div>
-            <img src="{{ $list->images }}" class="profile_img">
+    <ul id="other_bar">
+        <div class="other_user">
+            <div>
+                <img src="{{ $list->images }}" class="profile_img">
+            </div>
+            <div class="other_info">
+                <li class="other_column">Name</li>
+                <li class="other_data">{{ $list->username }}</li>
+            </div>
+            <div class="other_info">
+                <li class="other_column">Bio</li>
+                <li class="other_data">{{ $list->bio }}</li>
+            </div>
         </div>
-        <div>
-            <li>Name</li>
-            <li>{{ $list->username }}</li>
-        </div>
-        <div>
-            <li>Bio</li>
-            <li>{{ $list->bio }}</li>
-        </div>
-        <button src="" value="フォローする"></button>
+        <button src="" type="submit" class="other_btn follow_set_btn btn">フォローする</button>
     </ul>
     <table>
         @foreach ($lists as $list)

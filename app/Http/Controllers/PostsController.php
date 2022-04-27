@@ -18,7 +18,7 @@ class PostsController extends Controller
     {
         $list = DB::table('posts')
         ->leftJoin('users','posts.user_id' , '=' , 'users.id')
-        ->select('posts.id','users.username','posts.created_at','posts.post')
+        ->select('posts.id','users.username','posts.created_at','posts.post','posts.user_id','users.images')
         ->latest()->get();
         return view('posts.index',['list'=>$list]);
     }
