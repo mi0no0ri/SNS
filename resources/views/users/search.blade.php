@@ -17,7 +17,7 @@
         @foreach ($lists as $list)
         <ul class="search_page">
             <ul class="search_list">
-                <li class="search_img"><a href="{{route('user_profile')}}"><img src="{{ $list->images }}" class="profile_img"></a></li>
+                <li class="search_img"><a href="{{route('user_profile',['id'=>$list->id])}}"><img src="{{ $list->images }}" class="profile_img"></a></li>
                 <li class="search_name">{{ $list->username }}</li>
             </ul>
             <li class="follow_btn">
@@ -30,7 +30,6 @@
                 @else
                 <form action="{{ route('follow', ['user' => $list->id]) }}" method="POST">
                     {{ csrf_field() }}
-
                     <button type="submit" class="btn follow_set_btn">フォローする</button>
                 </form>
                 @endif

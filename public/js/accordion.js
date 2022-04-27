@@ -1,9 +1,8 @@
-<script>
 'use strict';
 
-$(document).ready(function(){
+$(function(){
 	$('.accordion_menu h3').on('click',function(){
-		$(this).next().toggleClass('hidden');
-	})
-})
-</script>
+	  $(this).next().slideToggle();
+	  $(this).toggleClass("hidden");
+	});
+  });

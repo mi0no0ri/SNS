@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Post;
 use App\Models\Follow;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -22,7 +23,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $auth = Auth::user();
-        return view('users.profile', [ 'auth' => $auth]);
+        return view('users.profile', ['auth' => $auth]);
     }
     public function profileUpdate(Request $request,User $user)
     {
@@ -31,21 +32,16 @@ class UsersController extends Controller
         //     'mail' => ['required', 'string', 'email','max:255',Rule::unique('users')->ignore(Auth::id())],
         // ]);
 
-        try {
-            $user = Auth::user();
-            $user->username = $request->input('username');
-            $user->mail = $request->input('mail');
-            $user->bio = $request->input('bio');
-            $user->save();
-        } catch(\Exception $e){
-            return back()->with('msg_error','プロフィールの更新に失敗しました。')->with();
+        $user = Auth::user();
+        $user->username = $request->input('username');
+        $user->mail = $request->input('mail');
+        $user->bio = $request->input('bio');
+        $user->images = $request->file('images');
+        $user->save();
+        if(null!==($request->file('images'))){
+        $fileName = $request->file('images');
+        $path = $request->file('images')->storeAs('public/userIcon',$fileName);
         }
-        return redirect()->route('profile')->with('msg_success','プロフィールの更新は完了しました。');
-    }
-    public function store(Request $request,User $user)
-    {
-        $document = $request->document;
-        $document->store('public');
         return redirect()->route('profile');
     }
     public function passwordUpdate(request $request)
@@ -62,10 +58,17 @@ class UsersController extends Controller
         }
         return redirect()->route('profile')->with('msg_success','パスワードの更新は完了しました。');
     }
-    public function profile(User $user)
-    {
-        $list = Auth::user();
-        return view('posts.userProfile',['list' => $list]);
+
+    public function otherProfile($id){
+        $list = DB::table('users')->where('id',$id)->first();
+
+        $lists = DB::table('posts')
+        ->leftJoin('users','posts.user_id' , '=' , 'users.id')
+        ->where('users.id',$id)
+        ->select('posts.id','users.username','posts.created_at','posts.post','users.images')
+        ->latest()->get();
+
+        return view('posts.userProfile',['list'=>$list,'lists'=>$lists]);
     }
 
     public static $editRules = array(
@@ -73,10 +76,10 @@ class UsersController extends Controller
     );
     public function storeImages(Request $request, User $user)
     {
-        $file = $request->images->store('public');
-        $user->image = str_replace('public/', '', $file);
+        $file = $request->images->store('images','public');
+        $user->image = str_replace('public/', 'storage', $file);
         $user->save();
-        return redirect('/top')->with('user', $user);
+        return redirect()->route('storeImages');
     }
 
 

@@ -44,9 +44,9 @@ Route::group(['middleware' => 'auth'],function(){
 
 Route::get('/profile','UsersController@index')->name('profile');
 Route::put('/profile','UsersController@profileUpdate')->name('profileUpdate');
-Route::put('/password_change','UserController@passwordUpdate')->name('password_edit');
+Route::put('/password_change','UsersController@passwordUpdate')->name('password_edit');
 });
-Route::get('/userProfile','UsersController@profile')->name('user_profile');
+Route::get('/userProfile/{id}','UsersController@otherProfile')->name('user_profile');
 
 //ログアウトのページ
 Route::get('/logout','Auth\LoginController@logout');

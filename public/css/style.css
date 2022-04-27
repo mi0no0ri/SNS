@@ -118,8 +118,8 @@ header{
   transition: 0.2s;
 }
 .accordion_menu #hidden {
-  /* display: none; */
-  margin: 19px 0 0 0;
+  display: none;
+  margin: 0;
   font-size: 14px;
   line-height: 1.5;
   color: #666;

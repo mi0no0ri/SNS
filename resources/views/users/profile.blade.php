@@ -6,12 +6,12 @@
             <ul class="profile_page">
                 <li>
                     @if($auth->images == null)
-                    <img src="/storage/dawn.png" class="profile_image">
+                    <img src="/storage/dawn.png" class="profile_img">
                     @else
-                    <img src="/storage/{{$auth->images}}" class="profile_image">
+                    <img src="/storage/userIcon/{{$auth->images}}" class="profile_img">
                     @endif
                 </li>
-                {!! Form::open(['route' => ['profile'],'method' => 'PUT']) !!}
+                {!! Form::open(['route' => ['profileUpdate'],'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
                 {!! Form::hidden('id',$auth->id) !!}
                 <div>
                 <div class="profile_list">
@@ -37,9 +37,9 @@
                     {{Form::label('bio','Bio')}}
                     {{Form::text('bio',$auth->bio,['class'=>'form-control', 'id'=>'bio', 'value'=>$auth->bio])}}
                 </div>
-                <div class="profile_list file_list">
+                <div class="profile_list ">
                     {{Form::label('images','Icon Image')}}
-                    {{Form::file('images',['class'=>'form-control', 'id'=>'images', 'value'=>$auth->images, 'enctype' => 'multipart/form-data'])}}
+                    {{Form::file('images',['class'=>'form-control', 'id'=>'images'])}}
                 </div>
                 </div>
             </ul>

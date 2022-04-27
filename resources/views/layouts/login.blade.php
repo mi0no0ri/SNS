@@ -29,7 +29,7 @@
             <div class="accordion_menu" id="accordion_menu">
                 <h3 class="ac_title" data-target="hidden">
                     <span><?php $user = Auth::user();?>{{ $user->username }} さん</span>
-                    <img src="/storage/dawn.png" alt="" class="profile_image">
+                    <img src="/storage/userIcon/{{$user->images}}" alt="" class="profile_img">
                 </h3>
                 <ul id="hidden">
                     <li class="ac_child"><a href="/top" class="ac_child">ホーム</a></li>
