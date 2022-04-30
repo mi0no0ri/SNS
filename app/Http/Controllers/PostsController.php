@@ -16,11 +16,14 @@ class PostsController extends Controller
 
     public function index()
     {
-        $list = DB::table('posts')
-        ->leftJoin('users','posts.user_id' , '=' , 'users.id')
-        ->select('posts.id','users.username','posts.created_at','posts.post','posts.user_id','users.images')
-        ->latest()->get();
-        return view('posts.index',['list'=>$list]);
+        $lists = DB::table('posts')
+            ->join('users','posts.user_id' , '=' , 'users.id')
+            ->join('follows', 'posts.user_id', '=', 'follows.id')
+            ->groupBy('posts.id')
+            ->where('follows.follower_id', '=', Auth::id())
+            ->select('posts.id','users.username','posts.created_at','posts.post','posts.user_id','users.images')
+            ->latest()->get('posts.id');
+        return view('posts.index',['lists'=>$lists]);
     }
 
     public function createForm()

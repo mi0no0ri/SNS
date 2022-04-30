@@ -2,8 +2,8 @@
 
 @section('content')
     <div>
-        <div>
-            <ul class="profile_page">
+        <div class="profile_page">
+            <ul class="profile_list">
                 <li>
                     @if($auth->images == null)
                     <img src="/storage/dawn.png" class="profile_img">
@@ -14,32 +14,32 @@
                 {!! Form::open(['route' => ['profileUpdate'],'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
                 {!! Form::hidden('id',$auth->id) !!}
                 <div>
-                <div class="profile_list">
+                <div class="profile_info">
                     {{Form::label('username','UserName')}}
-                    {{Form::text('username',$auth->username,['class'=>'form-control', 'id'=>'username', 'value'=>$auth->username])}}
+                    {{Form::text('username',$auth->username,['class'=>'form_controls', 'id'=>'username', 'value'=>$auth->username])}}
                     <span>{{$errors->first('username')}}</span>
                 </div>
-                <div class="profile_list">
+                <div class="profile_info">
                     {{Form::label('mail','MailAddress')}}
-                    {{Form::email('mail',$auth->mail,['class'=>'form-control', 'id'=>'mail', 'value'=>$auth->mail])}}
+                    {{Form::email('mail',$auth->mail,['class'=>'form_controls', 'id'=>'mail', 'value'=>$auth->mail])}}
                     <span>{{$errors->first('mail')}}</span>
                 </div>
-                <div class="profile_list">
+                <div class="profile_info">
                     {{Form::label('password','Password')}}
-                    {{Form::password('password',['class'=>'form-control', 'id'=>'password', 'disabled value'=>$auth->password])}}
+                    {{Form::password('password',['class'=>'form_controls', 'id'=>'password', 'disabled value'=>$auth->password])}}
                 </div>
-                <div class="profile_list">
+                <div class="profile_info">
                     {{Form::label('password','new Password')}}
-                    {{Form::password('password',['class'=>'form-control', 'id'=>'password', 'value'=>$auth->password])}}
+                    {{Form::password('password',['class'=>'form_controls', 'id'=>'password', 'value'=>$auth->password])}}
                     <span>{{$errors->first('password')}}</span>
                 </div>
-                <div class="profile_list">
+                <div class="profile_info">
                     {{Form::label('bio','Bio')}}
-                    {{Form::text('bio',$auth->bio,['class'=>'form-control', 'id'=>'bio', 'value'=>$auth->bio])}}
+                    {{Form::text('bio',$auth->bio,['class'=>'form_controls', 'id'=>'bio', 'value'=>$auth->bio])}}
                 </div>
-                <div class="profile_list ">
+                <div class="profile_info ">
                     {{Form::label('images','Icon Image')}}
-                    {{Form::file('images',['class'=>'form-control', 'id'=>'images'])}}
+                    {{Form::file('images',['class'=>'form_controls', 'id'=>'images'])}}
                 </div>
                 </div>
             </ul>

@@ -47,6 +47,7 @@ Route::put('/profile','UsersController@profileUpdate')->name('profileUpdate');
 Route::put('/password_change','UsersController@passwordUpdate')->name('password_edit');
 });
 Route::get('/userProfile/{id}','UsersController@otherProfile')->name('user_profile');
+Route::get('/userProfile/9',"UsersController@redirect");
 
 //ログアウトのページ
 Route::get('/logout','Auth\LoginController@logout');

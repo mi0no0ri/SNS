@@ -30,8 +30,6 @@ $countFollow = Follow::where('follower_id', '=', Auth::id())
 // お試し
 $info = Auth::user();
 
-
-
 //全ビューで共通で使えるよう渡してあげる。むっちゃ素敵。
 $username = array('username'=>null);
 View::share('username', $username['username']);
@@ -39,9 +37,6 @@ View::share('username', $username['username']);
 View::share('countFollower_id', $countFollower);
 View::share('countFollow_id', $countFollow);
 View::share('info', $info);
-
-
-
 
 return $next($request);
 });

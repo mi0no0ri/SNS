@@ -3,6 +3,7 @@ html{
 }
 body{
 }
+
 /* header */
 header{
     background:#3C4767;
@@ -31,7 +32,6 @@ header{
 	align-items: center;
 	margin: 0 50px;
 }
-
 
 /* side bar */
 #side-bar{
@@ -74,7 +74,6 @@ header{
 .user_search {
   margin: 20px 0 20px 50px!important;
 }
-
 
 /* accordion menu */
 .accordion_menu h3 {
@@ -269,11 +268,11 @@ form {
 }
 
 /* profile */
-.profile_page {
+.profile_list {
   display: flex;
   justify-content: start;
 }
-.profile_list {
+.profile_info {
   display: flex;
   justify-content: space-between;
   padding: 40px 60px 0 40px;
@@ -282,6 +281,22 @@ form {
   display: flex;
   justify-content: center;
 }
+.form_controls {
+  border: none;
+  border-bottom: 2px solid #6C6C6C;
+  background-color: #bfbfbf;
+  height: 1.5rem;
+
+}
+#bio {
+  height: 3rem;
+}
+#images {
+  height: 5rem;
+  
+}
+
+
 /* otherProfile */
 #other_bar {
   border-bottom: 4px solid #6C6C6C;
@@ -295,6 +310,8 @@ form {
 }
 .other_info {
   margin: 20px 0;
+  display: flex;
+  justify-content: start;
 }
 .other_column {
   padding: 0 30px 0 0;

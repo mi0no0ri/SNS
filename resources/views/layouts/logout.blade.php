@@ -21,8 +21,7 @@
 </head>
 <body>
     <header>
-        <h1 class="top_page img"><img src="images/main_logo.png"></h1>
-        <p class="top_page social">Social Network Service</p>
+        <h1 class="top_page login_img"><img src="images/main_logo.png"></h1>
     </header>
     <div id="container" class="top_page">
         @yield('content')

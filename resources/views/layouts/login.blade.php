@@ -29,7 +29,11 @@
             <div class="accordion_menu" id="accordion_menu">
                 <h3 class="ac_title" data-target="hidden">
                     <span><?php $user = Auth::user();?>{{ $user->username }} さん</span>
-                    <img src="/storage/userIcon/{{$user->images}}" alt="" class="profile_img">
+                    @if($user->images == null)
+                    <img src="/storage/dawn.png" class="profile_img">
+                    @else
+                    <img src="/storage/userIcon/{{$user->images}}" class="profile_img">
+                    @endif
                 </h3>
                 <ul id="hidden">
                     <li class="ac_child"><a href="/top" class="ac_child">ホーム</a></li>
@@ -50,7 +54,7 @@
                 <div class="population">
                     <p>フォロー数</p>
                     <p><?php $follows = DB::table('follows'); ?>
-                    {{ $follows->where('follower_id', '=', Auth::id())->count()-1 }} 名</p>
+                    {{ $follows->where('follower_id', '=', Auth::id())->where('id', '<>', Auth::id())->count() }} 名</p>
                 </div>
                 <p class="btn follow_btn"><a href="/followList" class="inner">フォローリスト</a></p>
                 <div class="population">

@@ -98,6 +98,10 @@ class UsersController extends Controller
 
         return view('users.search',['lists'=>$lists,'followings' =>$followings]);
     }
+    public function redirect()
+    {
+        return redirect()->route('profile');
+    }
 
     // follow
     public function follow(User $user)

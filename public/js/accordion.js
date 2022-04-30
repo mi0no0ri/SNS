@@ -5,4 +5,8 @@ $(function(){
 	  $(this).next().slideToggle();
 	  $(this).toggleClass("hidden");
 	});
-  });
+});
+
+$('.accordion_menu').on('click',function(){
+	$('h3').toggleClass('selected');
+});

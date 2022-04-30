@@ -4,7 +4,14 @@
 <div>
     <div id="tweet">
         {!! Form::open(['url' => 'post/create']) !!}
-        <p><?php $user = Auth::user();?><img src="/storage/userIcon/{{$user->images}}" alt="プロフィール写真" class="profile_img"></p>
+        <div><a href="{{route('profile')}}">
+            <?php $user = Auth::user();?>
+            @if($user->images == null)
+            <img src="/storage/dawn.png" class="profile_img">
+            @else
+            <img src="/storage/userIcon/{{$user->images}}" class="profile_img">
+            @endif
+        </a></div>
         <div class="form_group">
             {!! Form::input('text', 'newPost', null, ['required', 'class' => 'form_control', 'placeholder' => '何をつぶやこうか...?']) !!}
         </div>
@@ -13,9 +20,20 @@
     </div>
     @csrf
     <table>
-        @foreach ($list as $list)
+        @foreach ($lists as $list)
         <ul class="post">
-            <li><a href="{{route('user_profile',['id'=>$list->user_id])}}"><img src="{{ $list->images }}" class="profile_img"></a></li>
+            <li>
+                @if($list->user_id == Auth::id())
+                <a href="{{route('profile')}}">
+                @else
+                <a href="{{route('user_profile',['id'=>$list->user_id])}}">
+                @endif
+                @if($list->images == null)
+                <img src="/storage/dawn.png" class="profile_img">
+                @else
+                <img src="/storage/userIcon/{{$list->images}}" class="profile_img">
+                @endif
+            </a></li>
             <div class="post_list">
                 <div class="post_head">
                     <li class="">{{ $list->username }}</li>
@@ -23,8 +41,10 @@
                 </div>
                 <li class="post_content">{{ $list->post }}</li>
                 <div class="post_list_btn">
+                    @if($list->user_id == Auth::id())
                     <li><a href="/post/{{$list->id}}/update-form" class="edit_btn"><img src="../images/edit.png" alt="編集"></a></li>
                     <li><a href="/post/{{$list->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')"><img src="../images/trash_h.png" alt="削除" class="delete_btn"></a></li>
+                    @endif
                 </div>
             </div>
         </ul>

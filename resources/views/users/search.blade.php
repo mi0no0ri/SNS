@@ -17,7 +17,13 @@
         @foreach ($lists as $list)
         <ul class="search_page">
             <ul class="search_list">
-                <li class="search_img"><a href="{{route('user_profile',['id'=>$list->id])}}"><img src="{{ $list->images }}" class="profile_img"></a></li>
+                <li class="search_img"><a href="{{route('user_profile',['id'=>$list->id])}}">
+                    @if($list->images == null)
+                    <img src="/storage/dawn.png" class="profile_img">
+                    @else
+                    <img src="/storage/userIcon/{{$list->images}}" class="profile_img">
+                    @endif
+                </a></li>
                 <li class="search_name">{{ $list->username }}</li>
             </ul>
             <li class="follow_btn">
