@@ -96,7 +96,7 @@ class UsersController extends Controller
         }
         $lists = $query->where('id', '<>', Auth::id())->get();
 
-        return view('users.search',['lists'=>$lists,'followings' =>$followings]);
+        return view('users.search',['lists'=>$lists,'followings'=>$followings,'keyword'=>$keyword]);
     }
     public function redirect()
     {
@@ -106,27 +106,22 @@ class UsersController extends Controller
     // follow
     public function follow(User $user)
     {
-        $follow = DB::table('follows')->where('follow_id', Auth::id())->first();
-        if(empty($follow)) {
-            $follow->create([
-                'follow_id' => $user()->id,
-                'follower_id' => $user()->id,
-            ]);
+        $follower = auth()->user();
+        $is_following = $follower->isFollowing($user->id);
+        if(!$is_following) {
+            $follower->follow($user->id);
+            return back();
         }
     }
+
     // unfollow
     public function unfollow(User $user)
     {
-        // $follower = auth()->user();
-        // $is_following = $follower->isFollowing($user->id);
-        // if($is_following) {
-        //     $follower->unfollow($user->id);
-        //     return back();
-        // }
-
-        $follower = DB::table('follows')->where('follower_id', Auth::id())->first();
-        $follower->delete();
-
-        return redirect('/search');
+        $follower = auth()->user();
+        $is_following = $follower->isFollowing($user->id);
+        if($is_following) {
+            $follower->unfollow($user->id);
+            return back();
+        }
     }
 }

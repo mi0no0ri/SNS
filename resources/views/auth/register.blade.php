@@ -5,7 +5,7 @@
 {!! Form::open() !!}
 <div class="login_page">
 
-<h2 class="top_page">新規ユーザー登録</h2>
+<p class="top_page">新規ユーザー登録</p>
 
 <div class="welcome">
 {{ Form::label('UserName') }}
@@ -28,7 +28,7 @@
 </div>
 
 <div>
-{{ Form::submit('RESISTER',['class' => 'login_btn']) }}
+{{ Form::submit('RESISTER',['class' => 'login_btn btn']) }}
 </div>
 
 <p><a href="/login" class="top_page register">ログイン画面へ戻る</a></p>

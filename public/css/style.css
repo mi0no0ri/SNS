@@ -229,11 +229,12 @@ form {
 .follow_username, .created_at {
   padding: 20px 0 0 0;
 }
-.follow_posts {
-
-}
 
 /* search */
+.search {
+  display: flex;
+  justify-content: space-between;
+}
 .search_list {
   display: flex;
   justify-content: start;
@@ -266,6 +267,10 @@ form {
   color: #6C6C6C;
   position: center;
 }
+.keyword {
+  margin: 30px 200px 0 0;
+  font-size: 15px;
+}
 
 /* profile */
 .profile_list {
@@ -286,14 +291,12 @@ form {
   border-bottom: 2px solid #6C6C6C;
   background-color: #bfbfbf;
   height: 1.5rem;
-
 }
 #bio {
   height: 3rem;
 }
 #images {
   height: 5rem;
-  
 }
 
 

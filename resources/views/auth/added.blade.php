@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="clear" class="login_page added_list">
-<p class="added_name">さん、</p>
+<p class="added_name"><?php $user = Auth::user();?>{{ $user->username }}さん、</p>
 <p class="welcome_list">ようこそ！DAWNSNSへ！</p>
 <p>ユーザー登録が完了しました。</p>
 <p class="welcome_list">さっそく、ログインをしてみましょう。</p>

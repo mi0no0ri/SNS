@@ -63,26 +63,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'username' => $data['username'],
-            'mail' => $data['mail'],
-            'password' => Hash::make($data['password']),
-            'images' => 'dawn.png',
-        ]);
     }
 
-    // public function registerForm(){
-    //     return view("auth.register");
-    // }
-
-    public function register(Request $request){
-        if($request->isMethod('post')){
-            $data = $request->input();
-
-            $this->create($data);
-            return redirect('added');
-        }
-        return view('auth.register');
+    public function register(Request $request)
+    {
+        $this->validator($request()->all())->validate();
+        return redirect('added');
     }
 
     public function added(){

@@ -54,7 +54,7 @@
                 <div class="population">
                     <p>フォロー数</p>
                     <p><?php $follows = DB::table('follows'); ?>
-                    {{ $follows->where('follower_id', '=', Auth::id())->where('id', '<>', Auth::id())->count() }} 名</p>
+                    {{ $follows->where('follower_id', '=', Auth::id())->count() }} 名</p>
                 </div>
                 <p class="btn follow_btn"><a href="/followList" class="inner">フォローリスト</a></p>
                 <div class="population">

@@ -11,13 +11,18 @@
             <input type="image" src="../images/search.png" name="submit" value="送信する" class="search_btn">
             @csrf
         </form>
+        @if($keyword == null)
+        @else
+        <p class="keyword">検索ワード：{{ $keyword }}</p>
+        @endif
     </div>
     @if(isset($lists))
-    <table>
+    <table class>
         @foreach ($lists as $list)
         <ul class="search_page">
             <ul class="search_list">
                 <li class="search_img"><a href="{{route('user_profile',['id'=>$list->id])}}">
+                    {{ csrf_field() }}
                     @if($list->images == null)
                     <img src="/storage/dawn.png" class="profile_img">
                     @else

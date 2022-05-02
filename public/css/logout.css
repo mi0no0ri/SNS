@@ -7,9 +7,6 @@
     height: 70vh;
 }
 /* login */
-html{
-    height: 100%;
-}
 body{
     height: 100%;
     background-image:linear-gradient(#3C4767, 75%, #ff5e4d);
@@ -22,10 +19,10 @@ body{
 }
 .login_img {
     height: 100px;
+    margin: 40px 0;
 }
 .social {
-    font-size: 30px;
-    padding: 0 0 60px 0;
+    font-size: 25px;
 }
 
 /* register */
@@ -33,10 +30,15 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: left;
-    padding: 10px 0;
+    margin: 0 20px;
 }
 .login_btn {
-    margin: 20px 0 0 150px;
+    margin: 20px 0;
+    height: 30px;
+    width: 90px;
+    color: #fff;
+    position: absolute;
+    right: 10px;
 }
 .register {
     padding: 40px 0 0 0 ;
@@ -49,6 +51,7 @@ body{
     background: rgba(0,0,0, .3);
     padding: 20px;
     border-radius: 3%;
+    position: relative;
 }
 
 /* added */
