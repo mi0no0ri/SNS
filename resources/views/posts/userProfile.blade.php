@@ -21,8 +21,19 @@
                     <li class="other_data">{{ $list->bio }}</li>
                 </div>
             </div>
-        </div>
-        <button src="" type="submit" class="other_btn follow_set_btn btn">フォローする</button>
+        </div><?php $followings = DB::table('follows')->where('follower_id',Auth::id())->get()->toArray();?>
+            @if(in_array($list->id,array_column($followings,'follow_id') ))
+            <form action="{{ route('unfollow', ['user' => $list->id]) }}" method="POST">
+                {{ csrf_field() }}
+                @method('delete')
+                <button type="submit" class="btn unfollow_set_btn unfollow_button">フォロー解除</button>
+            </form>
+            @else
+            <form action="{{ route('follow', ['user' => $list->id]) }}" method="POST">
+                {{ csrf_field() }}
+                <button type="submit" class="btn follow_set_btn follow_button">フォローする</button>
+            </form>
+            @endif
     </ul>
     <table>
         @foreach ($lists as $list)

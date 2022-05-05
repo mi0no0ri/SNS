@@ -49,7 +49,7 @@ header{
 .user_search {
   margin: 20px;
 }
-#username {
+#name {
   margin: 10px;
 }
 .side_bar .inner {
@@ -276,27 +276,37 @@ form {
 .profile_list {
   display: flex;
   justify-content: start;
+  margin: 30px 100px;
+  position: relative;
 }
 .profile_info {
   display: flex;
-  justify-content: space-between;
-  padding: 40px 60px 0 40px;
+  padding: 30px 100px 0 0;
 }
 .submit_btn {
   display: flex;
   justify-content: center;
+  margin: 70px 0 0 0;
 }
 .form_controls {
+  position: absolute;
+  display: flex;
+  justify-content: start;
   border: none;
   border-bottom: 2px solid #6C6C6C;
-  background-color: #bfbfbf;
+  background: rgba(0, 0, 0, .1);
   height: 1.5rem;
+  margin: 0 150px;
+}
+.password {
+  background: rgba(0, 0, 0, .0)!important;
 }
 #bio {
   height: 3rem;
 }
 #images {
   height: 5rem;
+  text-align: center;
 }
 
 
@@ -318,4 +328,9 @@ form {
 }
 .other_column {
   padding: 0 30px 0 0;
+}
+.unfollow_button,
+.follow_button {
+  height: 40px;
+  transform: translateY(150%);
 }

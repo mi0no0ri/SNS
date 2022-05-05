@@ -50,7 +50,7 @@
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p id="username"><?php $user = Auth::user();?>{{ $user->username }}さんの</p>
+                <p id="name"><?php $user = Auth::user();?>{{ $user->username }}さんの</p>
                 <div class="population">
                     <p>フォロー数</p>
                     <p><?php $follows = DB::table('follows'); ?>

@@ -39,24 +39,24 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(self::class, 'follows', 'follower_id', 'follow_id');
     }
-    public function getFollowUsers(Int $user_id)
+    public function getFollowUsers(Int $id)
     {
         return DB::table('follows')->where('follower_id', '=', Auth::id())->get('id');
     }
-    // follow
-    public function follow(Int $user_id)
+    // フォロー
+    public function follow(Int $id)
     {
-        return $this->follows()->attach($user_id);
+        return $this->follows()->attach($id);
     }
     // フォロー解除
-    public function unfollow(Int $user_id)
+    public function unfollow(Int $id)
     {
-        return $this->follows()->detach($user_id);
+        return $this->follows()->detach($id);
     }
     // フォローしてるか
-    public function isFollowing(Int $user_id)
+    public function isFollowing(Int $id)
     {
-        return (boolean) $this->follows()->where('follower_id', $user_id)->first(['follower_id']);
+        return (boolean) $this->follows()->where('follower_id', $id)->first(['follower_id']);
     }
 
 }

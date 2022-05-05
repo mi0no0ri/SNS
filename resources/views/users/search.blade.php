@@ -35,7 +35,7 @@
                 @if(in_array($list->id,array_column($followings,'follow_id') ))
                 <form action="{{ route('unfollow', ['user' => $list->id]) }}" method="POST">
                     {{ csrf_field() }}
-                    @method('delete')
+                    @method('DELETE')
                     <button type="submit" class="btn unfollow_set_btn">フォロー解除</button>
                 </form>
                 @else

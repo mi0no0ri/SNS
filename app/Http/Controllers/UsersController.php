@@ -103,7 +103,7 @@ class UsersController extends Controller
         return redirect()->route('profile');
     }
 
-    // follow
+    // フォロー
     public function follow(User $user)
     {
         $follower = auth()->user();
@@ -114,12 +114,12 @@ class UsersController extends Controller
         }
     }
 
-    // unfollow
+    // フォロー解除
     public function unfollow(User $user)
     {
         $follower = auth()->user();
         $is_following = $follower->isFollowing($user->id);
-        if($is_following) {
+        if(!$is_following) {
             $follower->unfollow($user->id);
             return back();
         }

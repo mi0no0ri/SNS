@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -38,6 +39,8 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+
+        $this->redirectTo = route('login');
     }
 
     /**
@@ -46,13 +49,29 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+    // validation
+    // validation error
+    protected $messages = [
+        'username.required' => 'お名前を入力してください。',
+        'username.max' => 'お名前は12文字以内で入力してください。',
+        'mail.required' => 'emailを入力してください。',
+        'mail.email' => '正しいemailを入力してください。',
+        'mail.max' => 'emailは12文字以内で入力してください。',
+        'mail.unique' => 'そのメールアドレスはすでに登録されています。',
+        'password.required' => 'パスワードを入力してください。',
+        'password.min' => 'パスワードは4文字以上で入力してください。',
+        'password.confirmed' => '入力されたパスワードが一致しません。',
+    ];
+    protected $rules = [
+        'username' => ['required','between:4,12'],
+        'mail' => ['required','between:4,12','unique:users,mail',],
+        'password' => ['required','string','between:4,12','unique:users,password'],
+        'password confirm' => ['required','string','between:4,12','unique:users,password','same:Password'],
+    ];
+
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'username' => 'required|string|max:255',
-            'mail' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:4|confirmed',
-        ]);
+        return Validator::make($data, $this->rules, $this->messages);
     }
 
     /**
@@ -63,27 +82,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $user = new User();
+        $user->fill($data);
+        $user->password = Hash::make($data['password']);
+        $user->save();
+        return redirect()->route('added');
     }
 
-    public function register(Request $request)
-    {
-        $this->validator($request()->all())->validate();
-        return redirect('added');
-    }
 
     public function added(){
         return view('auth.added');
     }
-    // バリデーション
-    // public function store(Request $request)
-    // {
-    //     $myUser = new MyUser;
-    //     $rules = [
-    //         'username' => ['required','between:4,12'],
-    //         'MailAddress' => ['required','between:4,12','unique:users,mail',],
-    //         'Password' => ['required','string','between:4,12','unique:users,password'],
-    //         'Password confirm' => ['required','string','between:4,12','unique:users,password','same:Password'],
-    //     ];
-    //     $this->validate($request,$rules);
-    // }
 }

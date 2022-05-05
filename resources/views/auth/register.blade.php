@@ -2,39 +2,51 @@
 
 @section('content')
 
-{!! Form::open() !!}
-<div class="login_page">
-
-<p class="top_page">新規ユーザー登録</p>
-
-<div class="welcome">
-{{ Form::label('UserName') }}
-{{ Form::text('username',null,['class' => 'input']) }}
-</div>
-
-<div class="welcome">
-{{ Form::label('MailAddress') }}
-{{ Form::text('mail',null,['class' => 'input']) }}
-</div>
-
-<div class="welcome">
-{{ Form::label('Password') }}
-{{ Form::password('password',null,['class' => 'input']) }}
-</div>
-
-<div class="welcome">
-{{ Form::label('Password confirm') }}
-{{ Form::password('password-confirm',null,['class' => 'input']) }}
-</div>
-
-<div>
-{{ Form::submit('RESISTER',['class' => 'login_btn btn']) }}
-</div>
-
-<p><a href="/login" class="top_page register">ログイン画面へ戻る</a></p>
-
-</div>
-{!! Form::close() !!}
-
+    {!! Form::open(['route' => ['register'],'method' => 'POST','enctype' => 'multipart/form-data']) !!}
+    @csrf
+        <div class="login_page">
+            <p class="top_page">新規ユーザー登録</p>
+                <div class="welcome">
+                    {{ Form::label('username','UserName') }}
+                    {{ Form::text('username',null,['class' => 'input']) }}
+                    @error('username')
+                        <span>
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="welcome">
+                    {{ Form::label('mail','MailAddress') }}
+                    {{ Form::email('mail',null,['class' => 'input']) }}
+                    @error('mail')
+                        <span>
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="welcome">
+                    {{ Form::label('password','Password') }}
+                    {{ Form::password('password',null,['class' => 'input']) }}
+                    @error('password')
+                        <span>
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="welcome">
+                    {{ Form::label('password','Password confirm') }}
+                    {{ Form::password('password-confirm',null,['class' => 'input']) }}
+                    @error('password')
+                        <span>
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div>
+                    {{Form::submit('RESISTER',['class'=>'btn login_btn'])}}
+                </div>
+            <p><a href="/login" class="top_page register">ログイン画面へ戻る</a></p>
+        </div>
+    {!! Form::close() !!}
 
 @endsection

@@ -39,7 +39,6 @@ class PostsController extends Controller
             'user_id' => Auth::id(),
             'created_at' => now(),
             'updated_at' => now(),
-            // 'images' => Auth::id(),
         ]);
         return redirect('/top');
     }
