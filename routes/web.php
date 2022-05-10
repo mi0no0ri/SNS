@@ -33,10 +33,10 @@ Route::get('/login', 'Auth\LoginController@login');
 Route::post('/login', 'Auth\LoginController@login');
 });
 
-Route::get('/register', 'Auth\RegisterController@create');
-Route::post('/register', 'Auth\RegisterController@create')->name('register');
+Route::get('/register', 'Auth\RegisterController@register');
+Route::post('/register', 'Auth\RegisterController@register')->name('register');
 
-Route::get('/added', 'Auth\RegisterController@added')->middleware('auth')->name('added');
+Route::get('/added', 'Auth\RegisterController@added')->name('added');
 
 
 //ログイン中のページ
@@ -50,7 +50,6 @@ Route::put('/profile','UsersController@profileUpdate')->name('profileUpdate');
 Route::put('/password_change','UsersController@passwordUpdate')->name('password_edit');
 });
 Route::get('/userProfile/{id}','UsersController@otherProfile')->name('user_profile');
-Route::get('/userProfile/9',"UsersController@redirect");
 
 //ログアウトのページ
 Route::get('/logout','Auth\LoginController@logout');
@@ -72,8 +71,8 @@ Route::get('/post/create','PostsController@create');
 Route::post('/post/create','PostsController@create');
 
 //投稿の編集
-Route::get('post/{id}/update-form', 'PostsController@updateForm');
-Route::post('post/update','PostsController@update');
+Route::get('/post/{id}/update-form', 'PostsController@updateForm');
+Route::post('/post/update/{id}','PostsController@update')->name('update');
 
 // delete
 Route::get('post/{id}/delete','PostsController@delete');

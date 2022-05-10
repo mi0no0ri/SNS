@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validate;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Post;
@@ -27,36 +27,41 @@ class UsersController extends Controller
     }
     public function profileUpdate(Request $request,User $user)
     {
-        // $request->Validate([
-        //     'username' => 'required | string | max:255',
-        //     'mail' => ['required', 'string', 'email','max:255',Rule::unique('users')->ignore(Auth::id())],
-        // ]);
+        $request->validate([
+            'username' => ['between:4,12'],
+            'mail' => ['between:4,20',Rule::unique('users','mail')->ignore($request->id)],
+            'password' => ['alpha_num','between:4,12','nullable','unique:users,password'],
+            'bio' => ['max:200'],
+            'images' => ['image','file','mimes:jpg,png,bmp,gif,svg']
+        ],[
+            'username.between' => 'お名前は4文字から12文字で入力してください。',
+            'mail.email' => '正しいemailを入力してください。',
+            'mail.between' => 'emailは4文字から20文字で入力してください。',
+            'mail.unique' => 'そのメールアドレスはすでに登録されています。',
+            'password.between' => 'パスワードは4文字から12文字で入力してください。',
+            'password.alpha_num' => '英数字で入力してください。',
+            'bio.max' => '200文字以内で入力してください。',
+            'images.image' => '指定されたファイルが画像ではありません。',
+            'images.mimes' => '指定された拡張子（JPG、PNG、BMP、GIF、SVG）ではありません。',
+            'images.string' => '英数字で入力してください。'
+        ]);
 
         $user = Auth::user();
         $user->username = $request->input('username');
         $user->mail = $request->input('mail');
+        if($request->password !== null){
+        $user->password = bcrypt($request->input('password'));
+        }
         $user->bio = $request->input('bio');
+        if($request->images !== null){
         $user->images = $request->file('images');
+        }
         $user->save();
         if(null!==($request->file('images'))){
         $fileName = $request->file('images');
         $path = $request->file('images')->storeAs('public/userIcon',$fileName);
         }
         return redirect()->route('profile');
-    }
-    public function passwordUpdate(request $request)
-    {
-        // $request->Validate([
-        //     'password' => 'required | string | min:8 | confirmed',
-        // ]);
-        try {
-            $user = Auth::user();
-            $user->password = bcrypt($request->input('password'));
-            $user->save();
-        } catch (\Exception $e) {
-            return back()->with('msg_error', 'パスワードの更新に失敗しました。')->with();
-        }
-        return redirect()->route('profile')->with('msg_success','パスワードの更新は完了しました。');
     }
 
     public function otherProfile($id){

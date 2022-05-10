@@ -24,7 +24,7 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a href="/top"><img src="/images/main_logo.png" class="image"></a></h1>
+        <h1><a href="/top"><img src="/images/main_logo.png" class="image" id="image"></a></h1>
         <nav>
             <div class="accordion_menu" id="accordion_menu">
                 <h3 class="ac_title" data-target="hidden">

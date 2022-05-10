@@ -2,7 +2,7 @@
 
 @section('content')
 
-    {!! Form::open(['route' => ['register'],'method' => 'POST','enctype' => 'multipart/form-data']) !!}
+    {!! Form::open(['route' => ['register','added'],'method' => 'POST','enctype' => 'multipart/form-data']) !!}
     @csrf
         <div class="login_page">
             <p class="top_page">新規ユーザー登録</p>
@@ -10,7 +10,7 @@
                     {{ Form::label('username','UserName') }}
                     {{ Form::text('username',null,['class' => 'input']) }}
                     @error('username')
-                        <span>
+                        <span class="error_msg">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
@@ -19,7 +19,7 @@
                     {{ Form::label('mail','MailAddress') }}
                     {{ Form::email('mail',null,['class' => 'input']) }}
                     @error('mail')
-                        <span>
+                        <span class="error_msg">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
@@ -28,7 +28,7 @@
                     {{ Form::label('password','Password') }}
                     {{ Form::password('password',null,['class' => 'input']) }}
                     @error('password')
-                        <span>
+                        <span class="error_msg">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
@@ -37,7 +37,7 @@
                     {{ Form::label('password','Password confirm') }}
                     {{ Form::password('password-confirm',null,['class' => 'input']) }}
                     @error('password')
-                        <span>
+                        <span class="error_msg">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror

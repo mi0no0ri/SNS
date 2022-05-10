@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -38,7 +39,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest',['except' => 'added']);
 
         $this->redirectTo = route('login');
     }
@@ -82,15 +83,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = new User();
-        $user->fill($data);
-        $user->password = Hash::make($data['password']);
-        $user->save();
-        return redirect()->route('added');
+        return User::create([
+            'username' => $data['username'],
+            'mail' => $data['mail'],
+            'password' => bcrypt($data['password']),
+        ]);
     }
+    public function register(Request $request)
+    {
+        if($request->isMethod('post')){
+            $data = $request->input();
 
-
-    public function added(){
-        return view('auth.added');
+            $this->create($data);
+            return view('auth.added', $data);
+        }
+        return view('auth.register');
+    }
+    public function added(Request $request)
+    {
+        $data = [
+            'username' => $request->username,
+        ];
+        return view('auth.added',$data);
     }
 }

@@ -17,10 +17,11 @@ class PostsController extends Controller
     public function index()
     {
         $lists = DB::table('posts')
-            ->join('users','posts.user_id' , '=' , 'users.id')
-            ->join('follows', 'posts.user_id', '=', 'follows.follow_id')
+            ->leftJoin('users','posts.user_id' , '=' , 'users.id')
+            ->leftJoin('follows', 'posts.user_id', '=', 'follows.follow_id')
             ->groupBy('posts.id')
             ->where('follows.follower_id', '=', Auth::id())
+            ->orWhere('posts.user_id', '=', Auth::id())
             ->select('posts.id','users.username','posts.created_at','posts.post','posts.user_id','users.images')
             ->latest()->get('posts.id');
         return view('posts.index',['lists'=>$lists]);
@@ -33,6 +34,11 @@ class PostsController extends Controller
 
     public function create(Request $request)
     {
+        $request->validate([
+            'post' => ['max:150'],
+        ],[
+            'post.max' => '投稿は150文字以内にしてください。'
+        ]);
         $post = $request->input('newPost');
         DB::table('posts')->insert([
             'post' => $post,

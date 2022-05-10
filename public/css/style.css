@@ -14,6 +14,7 @@ header{
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    z-index: 1;
 }
 #container{
     flex: 0 0 80%;
@@ -21,6 +22,9 @@ header{
 .image {
 	height: 70%;
 	width: 70%;
+}
+#image {
+  position: relative;
 }
 .arrow {
 	height: 1rem;
@@ -168,7 +172,7 @@ header{
 form {
   display: flex;
   justify-content: flex-start;
-  border-bottom: 4 solid #6C6C6C;
+  border-bottom: 4px solid #6C6C6C;
 }
 .profile_img {
   border-radius: 50%;
@@ -184,6 +188,23 @@ form {
   height: 40px;
   width: 40px;
 }
+.delete_button {
+  position: relative;
+}
+.delete_button .delete_switch_btn {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+.delete_button:hover .delete_switch_btn {
+  opacity: 1;
+}
+.delete_button:hover .delete_check {
+  visibility:hidden;
+}
+
+
 .post_list {
   display: flex;
   flex-direction: column;
@@ -205,8 +226,51 @@ form {
   margin: 20px 0 0 0;
   gap: 20px;
 }
-.delete_btn:hover {
-  background-image: url(../images/trash.png);
+
+
+/* modal */
+#modal {
+  display: none;
+  width:100%;
+	height:120%;
+	position:fixed;
+	top:0;
+	left:0;
+  z-index: 1;
+	background-color: rgba(0,0,0,0.3);
+}
+.modal_inner {
+  padding: 50px 50px 70px;
+}
+.modal_content {
+  margin: 12% 30%;
+  padding-bottom: 2%;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.edit_form {
+  position: absolute;
+  z-index: 2;
+  height: 100px;
+  width: 500px;
+  top: 200px;
+  left: 33%;
+  border-radius: 5px;
+  border: .5px solid #000;
+}
+.edit_btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+  display: flex;
+}
+.edit_confirm_btn {
+  display: flex;
+  justify-content: end;
+  margin: 20px 50px 0 auto;
 }
 
 /* follow */
@@ -216,7 +280,6 @@ form {
   justify-content: start;
   padding: 0 100px;
   border-bottom: 2px solid #6C6C6C;
-
 }
 .follow_title {
   margin: 20px 70px;
@@ -273,6 +336,10 @@ form {
 }
 
 /* profile */
+.profile_page {
+  font-size: 1rem;
+  color: #6C6C6C;
+}
 .profile_list {
   display: flex;
   justify-content: start;
@@ -281,22 +348,23 @@ form {
 }
 .profile_info {
   display: flex;
-  padding: 30px 100px 0 0;
+  padding: 20px 100px 0 0;
 }
 .submit_btn {
   display: flex;
   justify-content: center;
-  margin: 70px 0 0 0;
+  margin: 70px 0 40px 0;
 }
 .form_controls {
   position: absolute;
   display: flex;
   justify-content: start;
   border: none;
-  border-bottom: 2px solid #6C6C6C;
-  background: rgba(0, 0, 0, .1);
+  border-bottom: 1px solid #6C6C6C;
+  background: rgba(0, 0, 0, .05);
   height: 1.5rem;
   margin: 0 150px;
+  color: #6C6C6C;
 }
 .password {
   background: rgba(0, 0, 0, .0)!important;
@@ -307,6 +375,32 @@ form {
 #images {
   height: 5rem;
   text-align: center;
+}
+.error_msg {
+  padding-left: 470px;
+  color: #ff4747;
+}
+.error_message {
+  color: #ff4747;
+}
+.image_control {
+  display: none;
+}
+.image_label {
+  border-bottom: 1px solid #6C6C6C;
+  background: rgba(0, 0, 0, .05);
+  margin: -15px 150px;
+  width: 250px;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+}
+.file_image {
+  margin: 15px;
+  padding: 3px 5px;
+  color: #6C6C6C;
+  background-color: #fff;
+  border-radius: 5px;
 }
 
 
