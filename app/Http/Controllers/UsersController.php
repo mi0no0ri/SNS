@@ -67,13 +67,13 @@ class UsersController extends Controller
     public function otherProfile($id){
         $list = DB::table('users')->where('id',$id)->first();
 
-        $lists = DB::table('posts')
+        $posts = DB::table('posts')
         ->leftJoin('users','posts.user_id' , '=' , 'users.id')
         ->where('users.id',$id)
         ->select('posts.id','users.username','posts.created_at','posts.post','users.images')
         ->latest()->get();
 
-        return view('posts.userProfile',['list'=>$list,'lists'=>$lists]);
+        return view('posts.userProfile',['list'=>$list,'posts'=>$posts]);
     }
 
     public static $editRules = array(
@@ -91,8 +91,6 @@ class UsersController extends Controller
     public function search(Request $request)
     {
         $keyword = $request->input('keyword');
-
-        $lists = DB::table('users')->get()->toArray();
         $followings = DB::table('follows')->where('follower_id',Auth::id())->get()->toArray();
         $query = User::query();
 
@@ -119,7 +117,7 @@ class UsersController extends Controller
         }
     }
 
-    // フォロー解除
+    //
     public function unfollow(User $user)
     {
         $follower = auth()->user();

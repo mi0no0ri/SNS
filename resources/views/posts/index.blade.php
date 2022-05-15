@@ -15,7 +15,7 @@
         <div class="form_group">
             {!! Form::input('text', 'newPost', null, ['required', 'class' => 'form_control', 'placeholder' => '何をつぶやこうか...?']) !!}
         </div>
-        <input type="image" src="../images/post.png" name="submit" value="投稿する" class="post_btn" href="post/create-form">
+        <input type="image" src="../images/post.png" name="submit" class="post_btn">
         {!! Form::close() !!}
     </div>
     @csrf
@@ -59,10 +59,10 @@
                 @csrf
                 <div class="modal_content">
                     <div class="modal_inner">
-                        <p class="edit_list" id="modal_body">
+                        <div class="edit_list" id="modal_body">
                             <input type="hidden" name="id" value="{{$list->id}}">
                             <input type="text" value="" class="edit_form" name="upPost" id="edit_content">
-                        </p>
+                        </div>
                     </div>
                     <div class="edit_confirm_btn">
                         <button type="submit" class="edit_btn modal_close" id="edit_btn"><img src="../images/edit.png"></button>

@@ -17,7 +17,7 @@
         @endif
     </div>
     @if(isset($lists))
-    <table class>
+    <table>
         @foreach ($lists as $list)
         <ul class="search_page">
             <ul class="search_list">

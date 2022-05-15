@@ -36,20 +36,20 @@
             @endif
     </ul>
     <table>
-        @foreach ($lists as $list)
+        @foreach ($posts as $post)
         <ul class="post_list">
             <li><a href="">
-                @if($list->images == null)
+                @if($post->images == null)
                 <img src="/storage/dawn.png" class="profile_img">
                 @else
                 <img src="/storage/userIcon/{{$list->images}}" class="profile_img">
                 @endif
             </a></li>
             <div class="post_head">
-                <li class="">{{ $list->username }}</li>
-                <li class="created_at">{{ $list->created_at }}</li>
+                <li class="">{{ $post->username }}</li>
+                <li class="created_at">{{ $post->created_at }}</li>
             </div>
-            <li class="post_content">{{ $list->post }}</li>
+            <li class="post_content">{{ $post->post }}</li>
         </ul>
         @endforeach
     </table>

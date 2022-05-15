@@ -54,12 +54,4 @@ class FollowsController extends Controller
             'followers' => $followers
         ]);
     }
-    public function count()
-    {
-        $follows = DB::table('follows')
-            ->where('follower_id', '=', Auth::id())
-            ->count();
-
-        return view('layouts.login',['follows' => $follows]);
-    }
 }

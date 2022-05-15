@@ -183,28 +183,6 @@ form {
   width: 30px;
   margin: 60px 60px 0 50%;
 }
-.edit_btn,
-.delete_btn {
-  height: 40px;
-  width: 40px;
-}
-.delete_button {
-  position: relative;
-}
-.delete_button .delete_switch_btn {
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-}
-.delete_button:hover .delete_switch_btn {
-  opacity: 1;
-}
-.delete_button:hover .delete_check {
-  visibility:hidden;
-}
-
-
 .post_list {
   display: flex;
   flex-direction: column;
@@ -212,10 +190,6 @@ form {
   color: #6C6C6C;
   border-bottom: 1px solid #6C6C6C;
 }
-/* .post {
-  display: flex;
-  justify-content: space-around;
-} */
 .post_head {
   display: flex;
   justify-content: space-between;
@@ -227,6 +201,26 @@ form {
   gap: 20px;
 }
 
+.edit_btn,
+.delete_btn {
+  height: 40px;
+  width: 40px;
+}
+.delete_button {
+  position: relative;
+}
+.delete_switch_btn {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+.delete_switch_btn:hover {
+  opacity: 1;
+}
+.delete_button:hover .delete_check {
+  visibility:hidden;
+}
 
 /* modal */
 #modal {
