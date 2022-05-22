@@ -53,7 +53,6 @@ Route::get('/userProfile/{id}','UsersController@otherProfile')->name('user_profi
 
 //ログアウトのページ
 Route::get('/logout','Auth\LoginController@logout');
-Route::post('/logout','Auth\LoginController@logout');
 
 //バリデーション
 Route::get('/login','Authenticate@redirectTo')
@@ -72,7 +71,7 @@ Route::post('/post/create','PostsController@create');
 
 //投稿の編集
 Route::get('/post/{id}/update-form', 'PostsController@updateForm');
-Route::post('/post/update/{id}','PostsController@update')->name('update');
+Route::post('/post/update','PostsController@update')->name('update');
 
 // delete
 Route::get('post/{id}/delete','PostsController@delete');

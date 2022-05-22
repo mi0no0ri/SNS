@@ -22,10 +22,10 @@ class Controller extends BaseController
 $username = Auth::user();
 //フォロワーのカウント
 $countFollower = Follow::where('follow_id', '=', Auth::id())
-->count();
+    ->count();
 //フォローのカウント
 $countFollow = Follow::where('follower_id', '=', Auth::id())
-->count();
+    ->count();
 
 // お試し
 $info = Auth::user();

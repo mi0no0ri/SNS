@@ -52,28 +52,6 @@ class RegisterController extends Controller
      */
     // validation
     // validation error
-    protected $messages = [
-        'username.required' => 'お名前を入力してください。',
-        'username.max' => 'お名前は12文字以内で入力してください。',
-        'mail.required' => 'emailを入力してください。',
-        'mail.email' => '正しいemailを入力してください。',
-        'mail.max' => 'emailは12文字以内で入力してください。',
-        'mail.unique' => 'そのメールアドレスはすでに登録されています。',
-        'password.required' => 'パスワードを入力してください。',
-        'password.min' => 'パスワードは4文字以上で入力してください。',
-        'password.confirmed' => '入力されたパスワードが一致しません。',
-    ];
-    protected $rules = [
-        'username' => ['required','between:4,12'],
-        'mail' => ['required','between:4,12','unique:users,mail',],
-        'password' => ['required','string','between:4,12','unique:users,password'],
-        'password confirm' => ['required','string','between:4,12','unique:users,password','same:Password'],
-    ];
-
-    protected function validator(array $data)
-    {
-        return Validator::make($data, $this->rules, $this->messages);
-    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -92,6 +70,22 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         if($request->isMethod('post')){
+            $request->validate([
+                'username' => ['required','between:4,12'],
+                'mail' => ['required','between:4,12','unique:users,mail',],
+                'password' => ['required','string','between:4,12','unique:users,password'],
+                'password confirm' => ['required','string','between:4,12','unique:users,password','same:Password'],
+            ],[
+                'username.required' => 'お名前を入力してください。',
+                'username.max' => 'お名前は12文字以内で入力してください。',
+                'mail.required' => 'emailを入力してください。',
+                'mail.email' => '正しいemailを入力してください。',
+                'mail.max' => 'emailは12文字以内で入力してください。',
+                'mail.unique' => 'そのメールアドレスはすでに登録されています。',
+                'password.required' => 'パスワードを入力してください。',
+                'password.min' => 'パスワードは4文字以上で入力してください。',
+                'password.confirmed' => '入力されたパスワードが一致しません。',
+            ]);
             $data = $request->input();
 
             $this->create($data);

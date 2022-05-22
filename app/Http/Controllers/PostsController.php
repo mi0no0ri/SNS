@@ -17,19 +17,15 @@ class PostsController extends Controller
     public function index()
     {
         $lists = DB::table('posts')
-            ->leftJoin('users','posts.user_id' , '=' , 'users.id')
+            ->join('users','posts.user_id' , '=' , 'users.id')
             ->leftJoin('follows', 'posts.user_id', '=', 'follows.follow_id')
             ->groupBy('posts.id')
             ->where('follows.follower_id', '=', Auth::id())
             ->orWhere('posts.user_id', '=', Auth::id())
             ->select('posts.id','users.username','posts.created_at','posts.post','posts.user_id','users.images')
-            ->latest()->get('posts.id');
+            ->latest()
+            ->get('posts.id');
         return view('posts.index',['lists'=>$lists]);
-    }
-
-    public function createForm()
-    {
-        return view('posts.createForm');
     }
 
     public function create(Request $request)
@@ -64,13 +60,16 @@ class PostsController extends Controller
 
     public function update(Request $request)
     {
-        $id = $request->input('id');
-        $up_post = $request->input('upPost');
+        $id = $request
+            ->input('id');
+        $up_post = $request
+            ->input('upPost');
         DB::table('posts')
             ->where('id',$id)
-            ->update(
-                ['post' => $up_post]
-            );
+            ->update([
+                'post' => $up_post,
+                'updated_at' => now()
+            ]);
         return redirect('/top');
     }
 
@@ -80,13 +79,6 @@ class PostsController extends Controller
             ->where('id',$id)
             ->delete();
         return redirect('/top');
-    }
-
-    public function show($id)
-    {
-        $val = Post::with('user')->where('id', $id)->first();
-
-        return view('/top')->with('val',$val);
     }
 
 }

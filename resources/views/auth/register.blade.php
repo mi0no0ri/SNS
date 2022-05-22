@@ -10,7 +10,7 @@
                     {{ Form::label('username','UserName') }}
                     {{ Form::text('username',null,['class' => 'input']) }}
                     @error('username')
-                        <span class="error_msg">
+                        <span class="error_massage">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
@@ -19,7 +19,7 @@
                     {{ Form::label('mail','MailAddress') }}
                     {{ Form::email('mail',null,['class' => 'input']) }}
                     @error('mail')
-                        <span class="error_msg">
+                        <span class="error_massage">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
@@ -28,7 +28,7 @@
                     {{ Form::label('password','Password') }}
                     {{ Form::password('password',null,['class' => 'input']) }}
                     @error('password')
-                        <span class="error_msg">
+                        <span class="error_massage">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
@@ -37,7 +37,7 @@
                     {{ Form::label('password','Password confirm') }}
                     {{ Form::password('password-confirm',null,['class' => 'input']) }}
                     @error('password')
-                        <span class="error_msg">
+                        <span class="error_massage">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror

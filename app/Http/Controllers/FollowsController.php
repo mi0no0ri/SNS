@@ -19,7 +19,8 @@ class FollowsController extends Controller
             ->groupBy('posts.id')
             ->where('follows.follower_id', '=', Auth::id())
             ->select('posts.id','users.username','posts.created_at','posts.post','posts.user_id','users.images')
-            ->latest()->get('posts.id');
+            ->latest()
+            ->get('posts.id');
 
         $follows = DB::table('follows')
             ->join('users', 'follows.follow_id', '=', 'users.id')
@@ -27,10 +28,10 @@ class FollowsController extends Controller
             ->select('users.id','users.username','users.bio','users.images')
             ->get();
 
-            return view('follows.followList', [
-                'lists' => $lists,
-                "follows" => $follows
-            ]);
+        return view('follows.followList', [
+            'lists' => $lists,
+            "follows" => $follows
+        ]);
     }
     public function followerList(User $user)
     {

@@ -22,7 +22,6 @@
         <ul class="search_page">
             <ul class="search_list">
                 <li class="search_img"><a href="{{route('user_profile',['id'=>$list->id])}}">
-                    {{ csrf_field() }}
                     @if($list->images == null)
                     <img src="/storage/dawn.png" class="profile_img">
                     @else

@@ -47,31 +47,45 @@ class UsersController extends Controller
         ]);
 
         $user = Auth::user();
-        $user->username = $request->input('username');
-        $user->mail = $request->input('mail');
+        $user->username = $request
+            ->input('username');
+        $user->mail = $request
+            ->input('mail');
+        $user->bio = $request
+            ->input('bio');
+
         if($request->password !== null){
-        $user->password = bcrypt($request->input('password'));
+            $user->password = bcrypt($request->input('password'));
         }
-        $user->bio = $request->input('bio');
+
         if($request->images !== null){
-        $user->images = $request->file('images');
+            $user->images = $request
+                ->file('images');
         }
+
         $user->save();
+
         if(null!==($request->file('images'))){
-        $fileName = $request->file('images');
-        $path = $request->file('images')->storeAs('public/userIcon',$fileName);
+            $fileName = $request
+                ->file('images');
+            $path = $request
+                ->file('images')
+                ->storeAs('public/userIcon',$fileName);
         }
         return redirect()->route('profile');
     }
 
     public function otherProfile($id){
-        $list = DB::table('users')->where('id',$id)->first();
+        $list = DB::table('users')
+            ->where('id',$id)
+            ->first();
 
         $posts = DB::table('posts')
-        ->leftJoin('users','posts.user_id' , '=' , 'users.id')
-        ->where('users.id',$id)
-        ->select('posts.id','users.username','posts.created_at','posts.post','users.images')
-        ->latest()->get();
+            ->leftJoin('users','posts.user_id' , '=' , 'users.id')
+            ->where('users.id',$id)
+            ->select('posts.id','users.username','posts.created_at','posts.post','users.images')
+            ->latest()
+            ->get();
 
         return view('posts.userProfile',['list'=>$list,'posts'=>$posts]);
     }
@@ -81,23 +95,34 @@ class UsersController extends Controller
     );
     public function storeImages(Request $request, User $user)
     {
-        $file = $request->images->store('images','public');
+        $file = $request
+            ->images
+            ->store('images','public');
         $user->image = str_replace('public/', 'storage', $file);
         $user->save();
-        return redirect()->route('storeImages');
+        return redirect()
+            ->route('storeImages');
     }
 
 
     public function search(Request $request)
     {
-        $keyword = $request->input('keyword');
-        $followings = DB::table('follows')->where('follower_id',Auth::id())->get()->toArray();
+        $keyword = $request
+            ->input('keyword');
+        $followings = DB::table('follows')
+            ->where('follower_id',Auth::id())
+            ->get()
+            ->toArray();
         $query = User::query();
 
         if(!empty($keyword)) {
-            $query->where('username','LIKE',"%{$keyword}%")->where('id', '<>', Auth::id());
+            $query
+            ->where('username','LIKE',"%{$keyword}%")
+            ->where('id', '<>', Auth::id());
         }
-        $lists = $query->where('id', '<>', Auth::id())->get();
+        $lists = $query
+            ->where('id', '<>', Auth::id())
+            ->get();
 
         return view('users.search',['lists'=>$lists,'followings'=>$followings,'keyword'=>$keyword]);
     }
@@ -109,20 +134,24 @@ class UsersController extends Controller
     // フォロー
     public function follow(User $user)
     {
-        $follower = auth()->user();
-        $is_following = $follower->isFollowing($user->id);
+        $follower = auth()
+            ->user();
+        $is_following = $follower
+            ->isFollowing($user->id);
         if(!$is_following) {
             $follower->follow($user->id);
             return back();
         }
     }
 
-    //
+    //フォローを外す
     public function unfollow(User $user)
     {
-        $follower = auth()->user();
-        $is_following = $follower->isFollowing($user->id);
-        if(!$is_following) {
+        $follower = auth()
+            ->user();
+        $is_following = $follower
+            ->isFollowing($user->id);
+        if($is_following) {
             $follower->unfollow($user->id);
             return back();
         }

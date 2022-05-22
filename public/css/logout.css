@@ -53,6 +53,10 @@ body{
     border-radius: 3%;
     position: relative;
 }
+.error_massage {
+    color: red;
+    font-size: .7rem;
+}
 
 /* added */
 .added_name {
