@@ -34,7 +34,8 @@
                 @else
                 <img src="/storage/userIcon/{{$list->images}}" class="profile_img">
                 @endif
-            </a></li>
+                </a>
+            </li>
             <div class="post_list">
                 <div class="post_head">
                     <li class="">{{ $list->username }}</li>

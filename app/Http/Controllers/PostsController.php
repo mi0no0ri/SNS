@@ -22,7 +22,7 @@ class PostsController extends Controller
             ->groupBy('posts.id')
             ->where('follows.follower_id', '=', Auth::id())
             ->orWhere('posts.user_id', '=', Auth::id())
-            ->select('posts.id','users.username','posts.created_at','posts.post','posts.user_id','users.images')
+            ->select('posts.id','posts.user_id','posts.post','posts.created_at','users.username','users.images')
             ->latest()
             ->get('posts.id');
         return view('posts.index',['lists'=>$lists]);

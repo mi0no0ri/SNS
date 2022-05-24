@@ -83,7 +83,7 @@ class UsersController extends Controller
         $posts = DB::table('posts')
             ->leftJoin('users','posts.user_id' , '=' , 'users.id')
             ->where('users.id',$id)
-            ->select('posts.id','users.username','posts.created_at','posts.post','users.images')
+            ->select('posts.id','posts.post','posts.created_at','users.username','users.images')
             ->latest()
             ->get();
 
