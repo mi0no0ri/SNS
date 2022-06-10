@@ -5,11 +5,11 @@
 <div class="card-body">
      <div class="search">
         <form method="post" action="result" class="form">
+            @csrf
             <div class="word">
                 <input type="text" name="keyword" placeholder="ユーザー名" class="search_bar">
             </div>
             <input type="image" src="../images/search.png" name="submit" value="送信する" class="search_btn">
-            @csrf
         </form>
         @if($keyword == null)
         @else
