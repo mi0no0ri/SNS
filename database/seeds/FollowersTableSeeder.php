@@ -16,6 +16,8 @@ class FollowersTableSeeder extends Seeder
             Follow::create([
                 'follow_id'     =>$i,
                 'follower_id'   =>1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

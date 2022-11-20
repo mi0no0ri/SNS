@@ -24,8 +24,8 @@ class ValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required | between:4,12',
-            'MailAddress' => 'required | between:4,12 | unique:users,mail | email',
+            'username' => 'required | between:2,12',
+            'MailAddress' => 'required | between:4,30 | unique:users,mail | email',
             'Password' => 'required | string | between:4,12 | unique:users,password',
             'Password confirm' => 'required | string | between:4,12 | unique:users,password | same:Password',
             'images' => 'required | file | image | mimes:jpeg,png,jpg,gif | max:2048'
