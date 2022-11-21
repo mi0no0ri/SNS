@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
 <meta charset="utf-8" />
     <!--IEブラウザ対策-->
@@ -8,6 +8,7 @@
     <title></title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/logout.css">
+    <link rel="stylesheet" href="css/app.css">
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <!--サイトのアイコン指定-->
@@ -21,13 +22,10 @@
 </head>
 <body>
     <header>
-        <h1 class="top_page img"><img src="images/main_logo.png"></h1>
-        <p class="top_page social">Social Network Service</p>
+        <h1 class="top_page login_img"><img src="images/main_logo.png"></h1>
     </header>
     <div id="container" class="top_page">
         @yield('content')
     </div >
-    <script src="JavaScriptファイルのURL"></script>
-    <script src="JavaScriptファイルのURL"></script>
 </body>
 </html>

@@ -28,6 +28,7 @@ class ValidationRequest extends FormRequest
             'MailAddress' => 'required | between:4,12 | unique:users,mail | email',
             'Password' => 'required | string | between:4,12 | unique:users,password',
             'Password confirm' => 'required | string | between:4,12 | unique:users,password | same:Password',
+            'images' => 'required | file | image | mimes:jpeg,png,jpg,gif | max:2048'
         ];
     }
 }

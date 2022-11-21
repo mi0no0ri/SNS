@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::ADMIN_HOME;
 
     /**
      * Create a new controller instance.
@@ -37,37 +37,43 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:user')->except('logout');
+        $this->middleware('guest:admin')->except('logout');
+    }
+
+    public function showLoginForm()
+    {
+        return view('admin.login');
     }
 
     protected function guard()
     {
-        return Auth::guard('user');
+        return Auth::guard('admin');
     }
 
     public function login(Request $request)
     {
         if($request->isMethod('post')){
-            $data=$request->only('mail','password');
-            // ログインが成功したら、トップページへ
+            $data = $request->only('email','password');
             if(Auth::check()) {
-                return view('posts/index');
+                return view('admin.home');
             }
-            //↓ログイン条件は公開時には消すこと
             if(Auth::attempt($data)){
-                return redirect('/top');
+                return redirect(route('admin.home'));
             } else {
-                return redirect('/login');
+                return redirect(route('admin.login'));
             }
         }
-        return view("auth.login");
+        return view("admin.login");
     }
 
-    protected function logout(Request $request)
+    public function logout(Request $request)
     {
-        $user = Auth::user();
+        Auth::guard('admin')->logout();
 
-        Auth::logout();
-        return redirect('/login');
+        return $this->loggedOut($request);
     }
-}
+
+    public function loggedOut(Request $request)
+    {
+        return redirect(route('admin.login'));
+    }}

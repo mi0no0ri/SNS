@@ -2,26 +2,52 @@
 
 @section('content')
 
-<!-- <div class="card-header">
-    ユーザー検索
-</div> -->
 <div class="card-body">
-    <!-- <p>検索したいユーザーの情報を入力してください。</p> -->
      <div class="search">
         <form method="post" action="result" class="form">
-            <!-- <div class="category">
-                <p>検索項目: </p>
-                <select name="search_category">
-                    <option value="0" selected>選択してください</option>
-                </select>
-            </div> -->
+            @csrf
             <div class="word">
-                <!-- <p>検索ワード: </p> -->
-                <input type="text" name="search_word">
+                <input type="text" name="keyword" placeholder="ユーザー名" class="search_bar">
             </div>
             <input type="image" src="../images/search.png" name="submit" value="送信する" class="search_btn">
-            @csrf
         </form>
+        @if($keyword == null)
+        @else
+        <p class="keyword">検索ワード：{{ $keyword }}</p>
+        @endif
     </div>
+    @if(isset($lists))
+    <table>
+        @foreach ($lists as $list)
+        <ul class="search_page">
+            <ul class="search_list">
+                <li class="search_img"><a href="{{route('user_profile',['id'=>$list->id])}}">
+                    @if($list->images == null)
+                    <img src="/storage/dawn.png" class="profile_img">
+                    @else
+                    <img src="/storage/userIcon/{{$list->images}}" class="profile_img">
+                    @endif
+                </a></li>
+                <li class="search_name">{{ $list->username }}</li>
+            </ul>
+            <li class="follow_btn">
+                @if(in_array($list->id,array_column($followings,'follow_id') ))
+                <form action="{{ route('unfollow', ['user' => $list->id]) }}" method="POST">
+                    {{ csrf_field() }}
+                    @method('DELETE')
+                    <button type="submit" class="btn unfollow_set_btn">フォローを外す</button>
+                </form>
+                @else
+                <form action="{{ route('follow', ['user' => $list->id]) }}" method="POST">
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn follow_set_btn">フォローする</button>
+                </form>
+                @endif
+            </li>
+        </ul>
+        @endforeach
+    </table>
+    @endif
+</div>
 
 @endsection

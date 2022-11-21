@@ -2,13 +2,13 @@
 
 @section('content')
 
-<div id="clear">
-<p>さん、</p>
-<p>ようこそ！DAWNSNSへ！</p>
+<div id="clear" class="login_page added_list">
+<p class="added_name">{{ $username }}さん、</p>
+<p class="welcome_list">ようこそ！DAWNSNSへ！</p>
 <p>ユーザー登録が完了しました。</p>
-<p>さっそく、ログインをしてみましょう。</p>
+<p class="welcome_list">さっそく、ログインをしてみましょう。</p>
 
-<p class="btn"><a href="/login">ログイン画面へ</a></p>
+<p class="btn added_btn"><a href="/login">ログイン画面へ</a></p>
 </div>
 
 @endsection

@@ -1,24 +1,24 @@
-@extends('layouts.logout')
+@extends('layouts.app_admin')
 
 @section('content')
 
-    {!! Form::open(['route' => ['register','added'],'method' => 'POST','enctype' => 'multipart/form-data']) !!}
+    {!! Form::open(['route' => ['register','admin.added'],'method' => 'POST','enctype' => 'multipart/form-data']) !!}
     @csrf
         <div class="login_page">
             <p class="top_page">新規ユーザー登録</p>
                 <div class="welcome">
-                    {{ Form::label('username','UserName') }}
-                    {{ Form::text('username',null,['class' => 'input']) }}
-                    @error('username')
+                    {{ Form::label('name','Name') }}
+                    {{ Form::text('name',null,['class' => 'input']) }}
+                    @error('name')
                         <span class="error_massage">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
                 <div class="welcome">
-                    {{ Form::label('mail','MailAddress') }}
-                    {{ Form::email('mail',null,['class' => 'input']) }}
-                    @error('mail')
+                    {{ Form::label('email','MailAddress') }}
+                    {{ Form::email('email',null,['class' => 'input']) }}
+                    @error('email')
                         <span class="error_massage">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -45,7 +45,7 @@
                 <div>
                     {{Form::submit('RESISTER',['class'=>'btn login_btn'])}}
                 </div>
-            <p><a href="/login" class="top_page register">ログイン画面へ戻る</a></p>
+            <p><a href="login" class="top_page register">ログイン画面へ戻る</a></p>
         </div>
     {!! Form::close() !!}
 
