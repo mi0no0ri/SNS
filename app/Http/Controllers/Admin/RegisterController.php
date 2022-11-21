@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
@@ -31,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::ADMIN_HOME;
 
     /**
      * Create a new controller instance.
@@ -40,12 +40,12 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:user');
+        $this->middleware('guest:admin');
     }
 
     protected function guard()
     {
-        return Auth::guard('user');
+        return Auth::guard('admin');
     }
 
     /**
@@ -66,8 +66,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'username' => $data['username'],
-            'mail' => $data['mail'],
+            'name' => $data['name'],
+            'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }
@@ -75,17 +75,17 @@ class RegisterController extends Controller
     {
         if($request->isMethod('post')){
             $request->validate([
-                'username' => ['required','between:4,12'],
-                'mail' => ['required','between:4,12','unique:users,mail',],
-                'password' => ['required','string','between:4,12','unique:users,password'],
+                'name' => ['required','between:2,12'],
+                'email' => ['required','between:4,30','unique:admins,email',],
+                'password' => ['required','string','between:4,12'],
                 'password confirm' => ['required','string','between:4,12','unique:users,password','same:Password'],
             ],[
-                'username.required' => 'お名前を入力してください。',
-                'username.max' => 'お名前は12文字以内で入力してください。',
-                'mail.required' => 'emailを入力してください。',
-                'mail.email' => '正しいemailを入力してください。',
-                'mail.max' => 'emailは12文字以内で入力してください。',
-                'mail.unique' => 'そのメールアドレスはすでに登録されています。',
+                'name.required' => 'お名前を入力してください。',
+                'name.max' => 'お名前は12文字以内で入力してください。',
+                'email.required' => 'emailを入力してください。',
+                'email.email' => '正しいemailを入力してください。',
+                'email.max' => 'emailは12文字以内で入力してください。',
+                'email.unique' => 'そのメールアドレスはすでに登録されています。',
                 'password.required' => 'パスワードを入力してください。',
                 'password.min' => 'パスワードは4文字以上で入力してください。',
                 'password.confirmed' => '入力されたパスワードが一致しません。',
@@ -93,15 +93,21 @@ class RegisterController extends Controller
             $data = $request->input();
 
             $this->create($data);
-            return view('auth.added', $data);
+            return view('admin.added', $data);
         }
-        return view('auth.register');
+        return view('admin.register');
     }
+
+    public function showRegisterForm()
+    {
+        return view('admin.register');
+    }
+
     public function added(Request $request)
     {
         $data = [
             'username' => $request->username,
         ];
-        return view('auth.added',$data);
+        return view('admin.added',$data);
     }
 }

@@ -12,12 +12,7 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('posts')->insert([
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ]);
-
-            for($i = 1; $i <=10; $i++) {
+        for($i = 1; $i <=10; $i++) {
             Post::create([
                 'user_id'   =>$i,
                 'post'      =>'これはテスト投稿' .$i,
