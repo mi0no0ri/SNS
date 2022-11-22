@@ -57,7 +57,7 @@ class LoginController extends Controller
             if(Auth::check()) {
                 return view('admin.home');
             }
-            if(Auth::attempt($data)){
+            if(Auth::guard('admin')->attempt($data)){
                 return redirect(route('admin.home'));
             } else {
                 return redirect(route('admin.login'));
