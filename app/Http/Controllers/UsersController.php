@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Follow;
+use App\Models\Favorite;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -155,5 +156,33 @@ class UsersController extends Controller
             $follower->unfollow($user->id);
             return back();
         }
+    }
+
+    // favorite
+    public function favorite($post)
+    {
+        Auth::user()->favorite($post);
+        return back();
+    }
+
+    // unfavorite
+    public function unfavorite($post)
+    {
+        Auth::user()->unfavorite($post);
+        return back();
+    }
+
+
+    /**
+     * 与えられた年齢が成人かつ65歳以下の間であるかを判断するメソッド
+     * @return bool|string
+     */
+    public function validAge($age)
+    {
+        if (!is_numeric($age)) {
+            return 'Error, arguments is must be numeric.';
+        }
+
+        return ($age >= 18 && $age <= 65);
     }
 }

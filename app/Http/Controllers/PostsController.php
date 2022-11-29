@@ -25,7 +25,7 @@ class PostsController extends Controller
             ->select('posts.id','posts.user_id','posts.post','posts.created_at','users.username','users.images')
             ->latest()
             ->get('posts.id');
-        return view('posts.index',['lists'=>$lists]);
+        return view('posts.index', compact('lists'));
     }
 
     public function create(Request $request)
@@ -80,5 +80,4 @@ class PostsController extends Controller
             ->delete();
         return redirect('/top');
     }
-
 }

@@ -32,6 +32,26 @@ header{
 	align-items: center;
 	margin: 0 50px;
 }
+.fa-heart {
+  color: f004;
+  font-size: 20px;
+  cursor: pointer;
+}
+#favorite_icon {
+  width: 20%;
+  padding: 60px 20px 20px 100px;
+}
+#user_image {
+  width: 80%;
+}
+#profile_bar {
+  display: flex;
+  flex-direction: row;
+}
+.favo_btn {
+  border: none;
+  background-color: transparent;
+}
 
 /* side bar */
 #side-bar{
