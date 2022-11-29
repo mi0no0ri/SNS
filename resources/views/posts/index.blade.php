@@ -23,19 +23,43 @@
     <table>
         @foreach ($lists as $list)
         <ul class="post">
-            <li>
-                @if($list->user_id == Auth::id())
-                <a href="{{route('profile')}}">
-                @else
-                <a href="{{route('user_profile',['id'=>$list->user_id])}}">
-                @endif
-                @if($list->images == null)
-                <img src="/storage/dawn.png" class="profile_img">
-                @else
-                <img src="/storage/userIcon/{{$list->images}}" class="profile_img">
-                @endif
-                </a>
-            </li>
+            <div id="profile_bar">
+                <li id="user_image">
+                    @if($list->user_id == Auth::id())
+                    <a href="{{route('profile')}}">
+                    @else
+                    <a href="{{route('user_profile',['id'=>$list->user_id])}}">
+                    @endif
+                    @if($list->images == null)
+                    <img src="/storage/dawn.png" class="profile_img">
+                    @else
+                    <img src="/storage/userIcon/{{$list->images}}" class="profile_img">
+                    @endif
+                    </a>
+                </li>
+                <div id="favorite_icon">
+                    @if(Auth::check())
+                        @if(Auth::user()->favorites()->where('post_id', $list->id)->exists())
+                        <form action="{{ route('unfavorite', $list->id) }}" method="post">
+                            <input type="hidden" name="post_id">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="favo_btn">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </form>
+                        @else
+                        <form action="{{ route('favorite', $list->id) }}" method="post">
+                            <input type="hidden" name="post_id">
+                            @csrf
+                            <button type="submit" class="favo_btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </form>
+                        @endif
+                    @endif
+                </div>
+            </div>
             <div class="post_list">
                 <div class="post_head">
                     <li class="">{{ $list->username }}</li>

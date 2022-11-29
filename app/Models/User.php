@@ -31,10 +31,41 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    public function posts(){
+    public function posts()
+    {
         return $this->hasMany('App\Models\Post');
     }
 
+
+    // favorite
+    public function favorites()
+    {
+        return $this->belongsToMany('App\Models\Post', 'favorites', 'user_id', 'post_id')->withTimestamps();
+    }
+
+    public function isFavorite($post)
+    {
+        return $this->favorites()->where('post_id', $post)->exists();
+    }
+
+    public function favorite($post)
+    {
+        if($this->isFavorite($post)){
+        } else {
+            return $this->favorites()->attach($post);
+        }
+    }
+
+    public function unfavorite($post)
+    {
+        if($this->isFavorite($post)){
+            return $this->favorites()->detach($post);
+        } else {
+        }
+    }
+
+
+    // follow
     public function follows()
     {
         return $this->belongsToMany(self::class, 'follows', 'follower_id', 'follow_id');
@@ -58,5 +89,4 @@ class User extends Authenticatable
     {
         return $this->follows()->where('follow_id', $id)->first(['follower_id']);
     }
-
 }

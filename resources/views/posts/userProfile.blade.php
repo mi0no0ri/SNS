@@ -21,7 +21,11 @@
                     <li class="other_data">{{ $list->bio }}</li>
                 </div>
             </div>
-        </div><?php $followings = DB::table('follows')->where('follower_id',Auth::id())->get()->toArray();?>
+        </div>
+        <div>
+            <a href="{{ route('favorite_list', ['user' => $list->id]) }}">お気に入りした投稿</a>
+        </div>
+        <div><?php $followings = DB::table('follows')->where('follower_id',Auth::id())->get()->toArray();?>
             @if(in_array($list->id,array_column($followings,'follow_id') ))
             <form action="{{ route('unfollow', ['user' => $list->id]) }}" method="POST">
                 {{ csrf_field() }}
@@ -34,6 +38,7 @@
                 <button type="submit" class="btn follow_set_btn follow_button">フォローする</button>
             </form>
             @endif
+        </div>
     </ul>
     <table>
         @foreach ($posts as $post)

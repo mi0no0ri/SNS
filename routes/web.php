@@ -110,6 +110,11 @@ Route::get('/follow', 'UsersController@follow');
 // followerList
 Route::get('/follower','FollowsController@followerList');
 
+// favorite
+Route::post('top/favorite/{post}', 'UsersController@favorite')->name('favorite');
+Route::delete('top/favorite/{post}', 'UsersController@unfavorite')->name('unfavorite');
+Route::get('/favorite/{user}','FavoritesController@favoriteList')->name('favorite_list');
+
 Route::group(['middleware' => 'auth'],function(){
     Route::resource('users', 'UsersController', ['only' => ['index', 'show', 'update', 'updateForm']]);
 
