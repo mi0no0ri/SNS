@@ -25,6 +25,10 @@ Route::get('/', function () {
 // userログイン後
 Route::group(['middleware' => 'auth:user'], function() {
     Route::get('/home', 'HomeController@index')->name('home');
+    // お知らせ一覧
+    Route::get('notice', 'UsersController@notice')->name('notice');
+    // よくある質問一覧
+    Route::get('question', 'UsersController@question')->name('questions');
 });
 
 // admin認証不要
@@ -34,10 +38,10 @@ Route::group(['prefix' => 'admin'], function() {
      });
     Route::get('login', 'Admin\LoginController@showLoginForm')->name('admin.login');
     Route::post('login', 'Admin\LoginController@login');
-
+    //  新規登録
     Route::get('register', 'Admin\RegisterController@showRegisterForm')->name('admin.register');
     Route::post('register', 'Admin\RegisterController@register');
-
+    //  新規登録後画面遷移
     Route::get('/added', 'Admin\RegisterController@added')->name('admin.added');
 });
 
@@ -45,6 +49,28 @@ Route::group(['prefix' => 'admin'], function() {
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::post('logout', 'Admin\LoginController@logout')->name('admin.logout');
     Route::get('home', 'Admin\HomeController@index')->name('admin.home');
+    // お知らせ
+    Route::get('create_notice', 'Admin\NoticiesController@notice')->name('admin.notice');
+    // お知らせ投稿
+    Route::post('create_notice', 'Admin\NoticiesController@create_notice')->name('admin.create_notice');
+    // お知らせ一覧
+    Route::get('notice_list', 'Admin\NoticiesController@notice_list')->name('admin.notice_list');
+    // お知らせ編集
+    Route::get('notice_edit/{id}', 'Admin\NoticiesController@notice_editForm')->name('admin.notice_editForm');
+    Route::post('notice_edit', 'Admin\NoticiesController@edit_notice')->name('admin.edit_notice');
+    // お知らせ削除
+    Route::delete('notice_list/{id}', 'Admin\NoticiesController@delete_notice')->name('admin.delete_notice');
+    // よくある質問
+    Route::get('question', 'Admin\QuestionsController@question')->name('admin.question');
+    // よくある質問作成
+    Route::post('question', 'Admin\QuestionsController@create_question')->name('admin.create_question');
+    // よくある質問一覧
+    Route::get('question_list', 'Admin\QuestionsController@question_list')->name('admin.question_list');
+    // よくある質問編集
+    Route::get('question_edit/{id}', 'Admin\QuestionsController@question_editForm')->name('admin.question_editForm');
+    Route::post('question_edit', 'Admin\QuestionsController@edit_question')->name('admin.edit_question');
+    // よくある質問削除
+    Route::delete('question_delete/{id}', 'Admin\QuestionsController@delete_question')->name('admin.delete_question');
 });
 
 
@@ -113,7 +139,15 @@ Route::get('/follower','FollowsController@followerList');
 // favorite
 Route::post('top/favorite/{post}', 'UsersController@favorite')->name('favorite');
 Route::delete('top/favorite/{post}', 'UsersController@unfavorite')->name('unfavorite');
-Route::get('/favorite/{user}','FavoritesController@favoriteList')->name('favorite_list');
+// favoriteList
+Route::get('favorite/{user}','FavoritesController@favoriteList')->name('favorite_list');
+
+// block
+Route::post('userProfile/block/{user}', 'UsersController@block')->name('block');
+// unblock
+Route::delete('userProfile/block/{user}', 'UsersController@unblock')->name('unblock');
+// blockList
+Route::get('block_list', 'BlocksController@block')->name('blockList');
 
 Route::group(['middleware' => 'auth'],function(){
     Route::resource('users', 'UsersController', ['only' => ['index', 'show', 'update', 'updateForm']]);

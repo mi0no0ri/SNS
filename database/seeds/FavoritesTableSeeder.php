@@ -14,10 +14,10 @@ class FavoritesTableSeeder extends Seeder
     {
         for ($i = 1; $i <= 10; $i++) {
             Favorite::create([
-                'user_id'      =>$i,
-                'post_id'      =>$i,
-                'created_at'    =>now(),
-                'updated_at'     =>now(),
+                'user_id' => $i,
+                'post_id' => $i,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

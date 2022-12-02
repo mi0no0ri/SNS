@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Post;
 use App\Models\Follow;
 use App\Models\Favorite;
+use App\Models\Block;
 use Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -170,6 +171,36 @@ class UsersController extends Controller
     {
         Auth::user()->unfavorite($post);
         return back();
+    }
+
+    // block
+    public function block($user)
+    {
+        Auth::user()->block($user);
+        Auth::user()->unfollow($user);
+        return back();
+    }
+    // unblock
+    public function unblock($user)
+    {
+        Auth::user()->unblock($user);
+        return back();
+    }
+
+    // お知らせ一覧
+    public function notice()
+    {
+        $noticies = DB::table('noticies')->get();
+        return view('users.notice', compact('noticies'));
+    }
+
+    // よくある質問一覧
+    public function question()
+    {
+        $questions = DB::table('questions')
+            ->latest('updated_at')
+            ->get();
+        return view('users.question', compact('questions'));
     }
 
 

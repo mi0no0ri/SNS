@@ -31,18 +31,18 @@
                 <li class="search_name">{{ $list->username }}</li>
             </ul>
             <li class="follow_btn">
-                @if(in_array($list->id,array_column($followings,'follow_id') ))
+            @if(in_array($list->id,array_column($followings,'follow_id') ))
                 <form action="{{ route('unfollow', ['user' => $list->id]) }}" method="POST">
                     {{ csrf_field() }}
                     @method('DELETE')
                     <button type="submit" class="btn unfollow_set_btn">フォローを外す</button>
                 </form>
-                @else
+            @else
                 <form action="{{ route('follow', ['user' => $list->id]) }}" method="POST">
                     {{ csrf_field() }}
                     <button type="submit" class="btn follow_set_btn">フォローする</button>
                 </form>
-                @endif
+            @endif
             </li>
         </ul>
         @endforeach

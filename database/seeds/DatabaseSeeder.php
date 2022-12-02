@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             FollowersTableSeeder::class,
             AdminsTableSeeder::class,
             FavoritesTableSeeder::class,
+            BlocksTableSeeder::class,
+            NoticiesTableSeeder::class,
+            QuestionsTableSeeder::class,
         ]);
     }
 }

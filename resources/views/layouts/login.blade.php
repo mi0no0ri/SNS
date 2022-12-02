@@ -38,7 +38,8 @@
                 </h3>
                 <ul id="hidden">
                     <li class="ac_child"><a href="/top" class="ac_child">ホーム</a></li>
-                    <li class="ac_child"><a href="{{route('profile')}}" class="ac_child">プロフィール編集</a></li>
+                    <li class="ac_child"><a href="{{ route('notice') }}" class="ac_child">お知らせ一覧</a></li>
+                    <li class="ac_child"><a href="{{ route('profile') }}" class="ac_child">プロフィール編集</a></li>
                     <li class="ac_child"><a href="/logout" class="ac_child">ログアウト</a></li>
                 </ul>
             </div>

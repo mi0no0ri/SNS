@@ -23,23 +23,40 @@
             </div>
         </div>
         <div>
-            <a href="{{ route('favorite_list', ['user' => $list->id]) }}">お気に入りした投稿</a>
-        </div>
-        <div><?php $followings = DB::table('follows')->where('follower_id',Auth::id())->get()->toArray();?>
-            @if(in_array($list->id,array_column($followings,'follow_id') ))
-            <form action="{{ route('unfollow', ['user' => $list->id]) }}" method="POST">
-                {{ csrf_field() }}
+            @if(Auth::user()->blocks()->exists())
+            <form action="{{ route('unblock', ['user' => $list->id]) }}" method="post">
+                @csrf
                 @method('delete')
-                <button type="submit" class="btn unfollow_set_btn unfollow_button">フォローを外す</button>
+                <button type="submit">ブロックを外す</button>
             </form>
             @else
-            <form action="{{ route('follow', ['user' => $list->id]) }}" method="POST">
-                {{ csrf_field() }}
-                <button type="submit" class="btn follow_set_btn follow_button">フォローする</button>
+            <form action="{{ route('block', ['user' => $list->id]) }}" method="post">
+                @csrf
+                <button type="submit">ブロックする</button>
             </form>
+            <div><?php $followings = DB::table('follows')->where('follower_id',Auth::id())->get()->toArray();?>
+                @if(in_array($list->id,array_column($followings,'follow_id') ))
+                <form action="{{ route('unfollow', ['user' => $list->id]) }}" method="POST">
+                    {{ csrf_field() }}
+                    @method('delete')
+                    <button type="submit" class="btn unfollow_set_btn unfollow_button">フォローを外す</button>
+                </form>
+                @else
+                <form action="{{ route('follow', ['user' => $list->id]) }}" method="POST">
+                    {{ csrf_field() }}
+                    <button type="submit" class="btn follow_set_btn follow_button">フォローする</button>
+                </form>
+                @endif
+            </div>
             @endif
         </div>
     </ul>
+    @if(Auth::user()->blocks()->exists())
+        <p>このユーザーをブロックしています。</p>
+    @else
+    <div>
+        <a href="{{ route('favorite_list', ['user' => $list->id]) }}">お気に入りした投稿</a>
+    </div>
     <table>
         @foreach ($posts as $post)
         <ul class="post_list">
@@ -58,6 +75,7 @@
         </ul>
         @endforeach
     </table>
+    @endif
 </div>
 
 @endsection

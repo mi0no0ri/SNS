@@ -14,12 +14,12 @@ class AdminsTableSeeder extends Seeder
     {
         for ($i = 1; $i <= 10; $i++) {
             Admin::create([
-                'name'      =>'ADMIN' .$i,
-                'email'          =>'admin' .$i. '@test.com',
-                'password'      =>Hash::make('12345678'),
-                'images'        =>'https://placehold.jp/50×50.png',
-                'created_at'    =>now(),
-                'updated_at'     =>now(),
+                'name' => 'ADMIN' .$i,
+                'email' => 'admin' .$i. '@test.com',
+                'password' => Hash::make('12345678'),
+                'images' => 'https://placehold.jp/50×50.png',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }
