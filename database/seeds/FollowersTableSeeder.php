@@ -14,10 +14,10 @@ class FollowersTableSeeder extends Seeder
     {
         for ($i = 2; $i <= 10; $i++){
             Follow::create([
-                'follow_id'     =>$i,
-                'follower_id'   =>1,
-                'created_at'    =>now(),
-                'updated_at'     =>now(),
+                'follow_id' => $i,
+                'follower_id' => 1,
+                'created_at' => now(),
+                'updated_at'  => now(),
             ]);
         }
     }

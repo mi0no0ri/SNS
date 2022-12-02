@@ -14,12 +14,12 @@ class UsersTableSeeder extends Seeder
     {
         for ($i = 1; $i <= 10; $i++) {
             User::create([
-                'username'      =>'TEST' .$i,
-                'mail'          =>'test' .$i. '@test.com',
-                'password'      =>Hash::make('12345678'),
-                'images'        =>'https://placehold.jp/50×50.png',
-                'created_at'    =>now(),
-                'updated_at'     =>now(),
+                'username' => 'TEST' .$i,
+                'mail' => 'test' .$i. '@test.com',
+                'password' => Hash::make('12345678'),
+                'images' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

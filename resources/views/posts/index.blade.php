@@ -22,6 +22,7 @@
     </div>
     <table>
         @foreach ($lists as $list)
+        @continue($list->user_id == $list->blocked_userId)
         <ul class="post">
             <div id="profile_bar">
                 <li id="user_image">
@@ -97,7 +98,6 @@
             </form>
         </div>
         @endforeach
-
     </table>
 </div>
 

@@ -79,6 +79,10 @@
             </form>
             {!! Form::close() !!}
         </div>
+        <div>
+            <a href="{{ route('blockList') }}">ブロックしているユーザー</a>
+            <a href="{{ route('questions') }}">よくある質問</a>
+        </div>
     </div>
 
 @endsection
