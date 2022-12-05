@@ -3,13 +3,13 @@
 @section('content')
 
 <div>
-  <h1>お知らせ</h1>
-    <table>
+  <h1 class="notice_title">お知らせ</h1>
+    <table class="notice_list">
         <tr>
-            <th>タイトル</th>
-            <th>内容</th>
-            <th>作成日時</th>
-            <th>更新日時</th>
+            <th class="w_150">タイトル</th>
+            <th class="w_400">内容</th>
+            <th class="w_150">作成日時</th>
+            <th class="w_150">更新日時</th>
         </tr>
         @foreach($noticies as $notice)
         <tr>

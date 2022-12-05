@@ -88,11 +88,12 @@ header{
 .inner {
   color: #fff;
 }
-.follow_btn {
-  margin: 20px 0 20px 100px!important;
-}
 .user_search {
   margin: 20px 0 20px 50px!important;
+}
+.followList_btn,
+.followerList_btn {
+  margin-left: 50px!important;
 }
 
 /* accordion menu */
@@ -173,6 +174,10 @@ header{
 
 
 /* post */
+.index_form {
+  display: flex;
+  justify-content: start;
+}
 .form_control{
   height: 90px;
   width: 535%;
@@ -186,13 +191,13 @@ header{
   outline: none;
 }
 form {
-  display: flex;
-  justify-content: flex-start;
   border-bottom: 4px solid #6C6C6C;
 }
 .profile_img {
   border-radius: 50%;
   margin: 20px;
+  height: 50px;
+  width: 50px;
 }
 .post_btn {
   height: 30px;
@@ -213,8 +218,13 @@ form {
 .post_list_btn {
   display: flex;
   justify-content: end;
-  margin: 20px 0 0 0;
+  margin: 20px 40px 0 0;
   gap: 20px;
+}
+.profile_postList {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 40px;
 }
 
 .edit_btn,
@@ -294,12 +304,8 @@ form {
 .follow_title {
   margin: 20px 70px;
 }
-.profile_img {
-  border-radius: 50%;
-  height: 50px;
-  width: 50px;
-}
-.follow_username, .created_at {
+.follow_username,
+.created_at {
   padding: 20px 0 0 0;
 }
 
@@ -316,6 +322,7 @@ form {
   display: flex;
   justify-content: space-between;
   margin: 20px 200px 0 50px;
+  align-items: center;
 }
 .search_img {
   flex-basis: 50px;
@@ -323,14 +330,6 @@ form {
 .search_name {
   display: flex;
   align-items: center;
-}
-.follow_set_btn {
-  background-color: #3490dc!important;
-  color: #fff;
-}
-.unfollow_set_btn {
-  background-color: #ff4747!important;
-  color: #fff;
 }
 .profile_image{
   border-radius: 50%;
@@ -344,6 +343,13 @@ form {
   margin: 30px 200px 0 0;
   font-size: 15px;
 }
+.follow_btn {
+ background-color: #428bff!important;
+}
+.unfollow_btn {
+  background-color: #ff4747!important;
+}
+
 
 /* profile */
 .profile_page {
@@ -412,6 +418,11 @@ form {
   background-color: #fff;
   border-radius: 5px;
 }
+.profile_underList {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
 
 
 /* otherProfile */
@@ -420,6 +431,7 @@ form {
   display: flex;
   justify-content: space-between;
   padding: 40px 70px;
+  align-items: center;
 }
 .other_user {
   display: flex;
@@ -433,10 +445,23 @@ form {
 .other_column {
   padding: 0 30px 0 0;
 }
-.unfollow_button,
-.follow_button {
-  height: 40px;
-  transform: translateY(150%);
+.btn {
+  color: #fff;
+}
+.profile_switchBar {
+  display: flex;
+  justify-content: space-around;
+}
+.disable {
+  display: none;
+}
+#profile_post {
+  cursor: pointer;
+  padding: 10px 30px;
+}
+#profile_favo {
+  cursor: pointer;
+  padding: 10px 30px;
 }
 
 /* block list */
@@ -454,4 +479,23 @@ form {
   display: flex;
   justify-content: start;
   align-items: center;
+}
+
+/* よくある質問 */
+.question_list,
+.notice_list {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.question_title,
+.notice_title {
+  margin: 50px;
+  text-align: center;
+}
+.w_150 {
+  width: 150px;
+}
+.w_400 {
+  width: 400px;
 }

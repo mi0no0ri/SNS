@@ -2657,6 +2657,7 @@ textarea.form-control.is-invalid {
   display: flex;
   justify-content: center;
   margin: 15px;
+  color: #fff;
 }
 
 @media (prefers-reduced-motion: reduce) {

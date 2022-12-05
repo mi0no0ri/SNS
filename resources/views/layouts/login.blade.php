@@ -58,13 +58,13 @@
                     <p><?php $follows = DB::table('follows'); ?>
                     {{ $follows->where('follower_id', '=', Auth::id())->count() }} 名</p>
                 </div>
-                <p class="btn follow_btn"><a href="/followList" class="inner">フォローリスト</a></p>
+                <p class="btn followList_btn"><a href="/followList" class="inner">フォローリスト</a></p>
                 <div class="population">
                     <p>フォロワー数</p>
                     <p><?php $follows = DB::table('follows'); ?>
                     {{ $follows->where('follow_id', '=', Auth::id())->count() }} 名</p>
                 </div>
-                <p class="btn follow_btn"><a href="/follower" class="inner">フォロワーリスト</a></p>
+                <p class="btn followerList_btn"><a href="/follower" class="inner">フォロワーリスト</a></p>
             </div>
             <p class="btn user_search"><a href="/search" class="inner">ユーザー検索</a></p>
         </div>
