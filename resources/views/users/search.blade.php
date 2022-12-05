@@ -30,18 +30,22 @@
                 </a></li>
                 <li class="search_name">{{ $list->username }}</li>
             </ul>
-            <li class="follow_btn">
-            @if(in_array($list->id,array_column($followings,'follow_id') ))
-                <form action="{{ route('unfollow', ['user' => $list->id]) }}" method="POST">
-                    {{ csrf_field() }}
-                    @method('DELETE')
-                    <button type="submit" class="btn unfollow_set_btn">フォローを外す</button>
-                </form>
+            <li>
+            @if(Auth::user()->blocks()->where('blocked_userId', $list->id)->exists())
+                <p>ブロックしています</p>
             @else
-                <form action="{{ route('follow', ['user' => $list->id]) }}" method="POST">
-                    {{ csrf_field() }}
-                    <button type="submit" class="btn follow_set_btn">フォローする</button>
-                </form>
+                @if(in_array($list->id,array_column($followings,'follow_id') ))
+                    <form action="{{ route('unfollow', ['user' => $list->id]) }}" method="POST">
+                        {{ csrf_field() }}
+                        @method('DELETE')
+                        <button type="submit" class="btn unfollow_btn">フォローを外す</button>
+                    </form>
+                @else
+                    <form action="{{ route('follow', ['user' => $list->id]) }}" method="POST">
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn follow_btn">フォローする</button>
+                    </form>
+                @endif
             @endif
             </li>
         </ul>

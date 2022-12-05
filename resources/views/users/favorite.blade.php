@@ -50,7 +50,9 @@
             <li class="post_content" id="post_content">{{ $favorite->post }}</li>
             <div class="post_favorite_btn">
                 @if($favorite->user_id == Auth::id())
-                <button href="" class="edit_btn modal_btn" data-target="modal{{$favorite->id}}" value="{{$favorite->post}}"><img src="../images/edit.png"></button>
+                <button href="" class="edit_btn modal_btn" data-target="modal{{$favorite->id}}" value="{{$favorite->post}}">
+                    <img src="../images/edit.png">
+                </button>
                 <li class="delete_button">
                     <a href="/post/{{$favorite->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">
                         <img src="../images/trash_h.png" alt="削除" class="delete_btn delete_check">

@@ -79,7 +79,7 @@
             </form>
             {!! Form::close() !!}
         </div>
-        <div>
+        <div class="profile_underList">
             <a href="{{ route('blockList') }}">ブロックしているユーザー</a>
             <a href="{{ route('questions') }}">よくある質問</a>
         </div>

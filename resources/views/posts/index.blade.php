@@ -3,7 +3,7 @@
 @section('content')
 <div>
     <div id="tweet">
-        {!! Form::open(['url' => 'post/create']) !!}
+        {!! Form::open(['url' => 'post/create', 'class' => 'index_form']) !!}
         <div>
             <a href="{{route('profile')}}">
                 <?php $user = Auth::user();?>
@@ -26,11 +26,7 @@
         <ul class="post">
             <div id="profile_bar">
                 <li id="user_image">
-                    @if($list->user_id == Auth::id())
-                    <a href="{{route('profile')}}">
-                    @else
                     <a href="{{route('user_profile',['id'=>$list->user_id])}}">
-                    @endif
                     @if($list->images == null)
                     <img src="/storage/dawn.png" class="profile_img">
                     @else
@@ -66,10 +62,12 @@
                     <li class="">{{ $list->username }}</li>
                     <li class="created_at">{{ $list->created_at }}</li>
                 </div>
-                <li class="post_content" id="post_content">{{ $list->post }}</li>
+                <li class="" id="post_content">{{ $list->post }}</li>
                 <div class="post_list_btn">
                     @if($list->user_id == Auth::id())
-                    <button href="" class="edit_btn modal_btn" data-target="modal{{$list->id}}" value="{{$list->post}}"><img src="../images/edit.png"></button>
+                    <button href="" class="edit_btn modal_btn" data-target="modal{{$list->id}}" value="{{$list->post}}">
+                        <img src="../images/edit.png">
+                    </button>
                     <li class="delete_button">
                         <a href="/post/{{$list->id}}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')">
                             <img src="../images/trash_h.png" alt="削除" class="delete_btn delete_check">

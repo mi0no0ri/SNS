@@ -72,7 +72,7 @@ class PostsController extends Controller
                 'post' => $up_post,
                 'updated_at' => now()
             ]);
-        return redirect('/top');
+        return back();
     }
 
     public function delete($id)

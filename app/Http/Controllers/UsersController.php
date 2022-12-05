@@ -89,7 +89,15 @@ class UsersController extends Controller
             ->latest()
             ->get();
 
-        return view('posts.userProfile',['list'=>$list,'posts'=>$posts]);
+        $blocks = Block::where('block_userId', Auth::id())
+            ->first();
+
+        $favorites = DB::table('favorites')
+        ->join('posts', 'favorites.post_id', 'posts.id')
+        ->join('users', 'posts.user_id', 'users.id')
+            ->where('favorites.user_id', $id)
+            ->get();
+        return view('posts.userProfile',compact('list', 'posts', 'blocks', 'favorites'));
     }
 
     public static $editRules = array(
@@ -173,14 +181,14 @@ class UsersController extends Controller
         return back();
     }
 
-    // block
+    // ブロック
     public function block($user)
     {
         Auth::user()->block($user);
         Auth::user()->unfollow($user);
         return back();
     }
-    // unblock
+    // ブロック解除
     public function unblock($user)
     {
         Auth::user()->unblock($user);

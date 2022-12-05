@@ -35,7 +35,7 @@
                         <li class="follow_username">{{ $list->username }}</li>
                         <li class="created_at">{{ $list->created_at }}</li>
                     </div>
-                    <li class="post_content">{{ $list->post }}</li>
+                    <li class="">{{ $list->post }}</li>
                 </ul>
                 @endforeach
             </table>

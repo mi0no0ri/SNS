@@ -121,18 +121,15 @@ Route::post('/result','UsersController@search');
 // 投稿
 Route::get('/post/create','PostsController@create');
 Route::post('/post/create','PostsController@create');
-
 //投稿の編集
 Route::get('/post/{id}/update-form', 'PostsController@updateForm');
 Route::post('/post/update','PostsController@update')->name('update');
-
 // delete
 Route::get('post/{id}/delete','PostsController@delete');
 
 // followList
 Route::get('/followList', 'FollowsController@followList');
 Route::get('/follow', 'UsersController@follow');
-
 // followerList
 Route::get('/follower','FollowsController@followerList');
 
